@@ -467,6 +467,7 @@ HTML `<span>` 元素是内联元素，可用作文本的容器。`<span>` 元素
 - submit - 提交按钮
 - reset - 重置按钮
 - hidden - 隐藏输入
+- file - 选择文件
 
 另外，这些 `<input>` 元素还有额外的 "name" 和 "value" 属性，对于某些类型，这两个属性是必选的。
 
@@ -582,3 +583,22 @@ nice!
 接下来的学习：CSS，JavaScript
 
 略。
+
+## HTML 补充
+
+### HTML 事件
+
+[HTML 事件属性](http://www.runoob.com/tags/ref-eventattributes.html)
+
+还真有有挺多事件有很用，但平时了解比较少的。比如 onresize、onblur、onfocus、onselect、onsubmit ...
+
+事件分为几大类：
+
+- 窗口事件属性 - onresize, onblur, onfocus ...
+- 表单事件 - onselect, onsubmit ...
+- 键盘事件 - onkeydown, onkeypress, onkeyup
+- 鼠标事件 - onclick, ondrag, onscroll ...
+- 多媒体事件
+- 其它事件
+
+事件必须借助 JavaScript 来处理。
