@@ -1,6 +1,6 @@
 # HTML
 
-学习来源：
+学习资源：
 
 1. [HTML 教程](http://www.runoob.com/html/html-tutorial.html)
 

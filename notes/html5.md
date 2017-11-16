@@ -1,5 +1,9 @@
 # HTML5
 
+学习资源：
+
+1. [HTML5 教程](http://www.runoob.com/html/html5-tutorial.html)
+
 ## 简介
 
 HTML5 是 HTML 最新的修订版本，2014 年 10 月由万维网联盟 (W3C) 完成标准制定。
