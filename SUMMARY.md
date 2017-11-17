@@ -8,3 +8,4 @@
     * [CSS - 1](notes/css-1.md)
     * [CSS - 2](notes/css-2.md)
     * [CSS3](notes/css3.md)
+    * [CSS3 FlexBox](notes/css3-flexbox.md)
