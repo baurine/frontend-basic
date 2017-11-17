@@ -21,10 +21,10 @@ CSS 中可以使用注释：
 
     /* 这是个注释 */
     p {
-      text-align:center;
+      text-align: center;
       /* 这是另一个注释 */
-      color:black;
-      font-family:arial;
+      color: black;
+      font-family: arial;
     }
 
 ## CSS 选择器
@@ -59,7 +59,7 @@ CSS 中可以使用注释：
 
     .marked p {color: white;}
 
-上例表示，为所以 class="marked" 的元素内的 p 元素指定颜色为白色的样式。
+上例表示，为所有 class="marked" 的元素内的 p 元素指定颜色为白色的样式。
 
 ## CSS 组合选择符
 
@@ -160,9 +160,9 @@ CSS 的三种形式：
     </head>
 
     // mystyle.css
-    hr {color:sienna;}
-    p {margin-left:20px;}
-    body {background-image:url("/images/back40.gif");}
+    hr {color: sienna;}
+    p {margin-left: 20px;}
+    body {background-image: url("/images/back40.gif");}
 
 **内部样式表**
 
@@ -170,9 +170,9 @@ CSS 的三种形式：
 
     <head>
       <style>
-        hr {color:sienna;}
-        p {margin-left:20px;}
-        body {background-image:url("images/back40.gif");}
+        hr {color: sienna;}
+        p {margin-left: 20px;}
+        body {background-image: url("images/back40.gif");}
       </style>
     </head>
 
