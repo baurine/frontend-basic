@@ -1,5 +1,9 @@
 # CSS3
 
+学习资源：
+
+1. [CSS3 教程](http://www.runoob.com/css3/css3-tutorial.html)
+
 ## CSS3 简介
 
 ### CSS3 模块
@@ -81,7 +85,7 @@ CSS3 的 background-image 支持多重背景图像，不同的背景图片用逗
     }
 
     #example1 {
-        background: url(img_flwr.gif) right bottom no-repeat, url(paper.gif) left top repeat;
+      background: url(img_flwr.gif) right bottom no-repeat, url(paper.gif) left top repeat;
     }
 
 **background-size**
@@ -148,7 +152,7 @@ CSS3 定义了两种类型的渐变：
 
 语法：
 
-    {background: linear-gradient(direction|angle, color-stop1, color-stop2, ...);}
+    background: linear-gradient(direction|angle, color-stop1, color-stop2, ...);
 
 所以，这里面至少包含两个要素：
 
@@ -418,28 +422,28 @@ skew() 方法没有 z 轴的变换。
 
 举例说明：
 
-  div {
-    width: 100px;
-    height: 100px;
-    background: red;
-  }
-  div:hover {
-    width: 300px;
-  }
+    div {
+      width: 100px;
+      height: 100px;
+      background: red;
+    }
+    div:hover {
+      width: 300px;
+    }
 
 上面例子中实现的效果，当鼠标移动到一个 100x100 的红色块元素上时，这个红色块元素的宽度会突然变成 300px，鼠标移开后，重新变回 100px，这个变化是突然的，瞬间的。
 
 我们想让这个变化是平缓的，缓慢的变长或变短，我们给 div 加上 transition 属性：
 
-  div {
-    width: 100px;
-    height: 100px;
-    background: red;
-    transition: width 2s;
-  }
-  div:hover {
-    width: 300px;
-  }
+    div {
+      width: 100px;
+      height: 100px;
+      background: red;
+      transition: width 2s;
+    }
+    div:hover {
+      width: 300px;
+    }
 
 `transition: width 2s;` 的作用是，监听 width 属性的变化，如果发生变生，那么让它的变化在 2s 内完成，而不是瞬间完成。
 
@@ -615,7 +619,7 @@ CSS3 图片的各种应用，包括圆角、缩略图、响应式图片、图片
 
 CSS2 时代移动设备还没有普及，因此，等到移动设备普及后，原来 @media 对移动设备的支持就不够友好了。
 
-CSS3 的多媒体查询继承了 CSS2 多媒体类型的所有思想：取代了查找设备的类型，CSS3 根据设置自适应显示。(?? 说的啥于玩意)
+CSS3 的多媒体查询继承了 CSS2 多媒体类型的所有思想：取代了查找设备的类型，CSS3 根据设置自适应显示。(?? 说的啥玩意)
 
 媒体查询可用于检测很多事情，例如：
 

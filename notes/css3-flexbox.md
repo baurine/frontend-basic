@@ -1,5 +1,9 @@
 # CSS3
 
+学习资源：
+
+1. [CSS3 FlexBox](http://www.runoob.com/css3/css3-flexbox.html)
+
 ## CSS3 弹性盒子 (FlexBox)
 
 相关的属性：
