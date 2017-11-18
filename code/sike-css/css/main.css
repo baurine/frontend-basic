@@ -1,0 +1,357 @@
+/*******************************************/
+/* 全局 */
+
+/* 使用 border-box 模型 */
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/**
+ * 固定背景
+ */
+body {
+  background: url(../img/bg5.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+
+  /* 全局字体风格 */
+  font-family: 'Open Sans','helvetica',arial,sans-serif;
+  font-weight: 300;
+  color: #62686f;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  /* 虽然在 body 里已经设置了 font-weight: 300，这里仍然需要，不能省略*/
+  font-weight: 300;
+  color: #333;
+}
+
+/*******************************************/
+/**
+ * 居中外包围框
+ */
+.container {
+  width: 960px;
+  margin: 100px auto;
+}
+
+/*******************************************/
+/**
+ * 实现头部容器
+ */
+.main-header {
+  text-align: center;
+  padding: 1px; /* Collapse Margin */
+  background-image: url(../img/banner.jpg);
+}
+/**
+ * 设置头像 img
+ */
+.main-header__avatar {
+  display: block; /* 设为 block */
+  margin: 0 auto; /* 居中，为什么 .main_header 中的 text-align:center 没有对头像生效？*/
+  /* 头像凸出容器 */
+  margin-top: -70px;
+  margin-bottom: 10px;
+  border: 3px solid white;
+
+  box-shadow: 0 0px 2px 1px rgba(0,0,0,0.2); /* 为头像设置阴影 */
+  border-radius: 999px; /* 头像变成圆形，为什么是 999px ?? */
+  /* 答案在这里：https://github.com/yisibl/blog/issues/2 */
+}
+/**
+ * 设定标题字体
+ */
+.main-header h1 {
+  margin: 0 auto;
+  margin-bottom: 20px; /* 注意，后面 style 会覆盖前面的 style，所以要注意次序 */
+
+  font-size: 50px;
+  color: #ffffff; /* white */
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+}
+
+/*******************************************/
+/* 开始设置导航 */
+.main-nav {
+  background-color: #333;
+  /* 块内元素居中 */
+  text-align: center;
+}
+
+.main-nav ul {
+  /* 消除默认样式 */
+  list-style: none;
+  /* 消除默认间隔 */
+  padding: 1px;
+  margin: 0;
+}
+
+.main-nav ul li {
+  /* 变成行内元素 */
+  display: inline-block;
+  margin: 15px 10px;
+}
+
+.main-nav ul li a {
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.main-nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/*******************************************/
+/* 开始设置页面内容之 what i do 部分 */
+.info-section {
+  background-color: #fff;
+  padding: 30px 60px;
+}
+
+.info-section header {
+  margin-bottom: 60px;
+
+  /* 居中所有 header */
+  text-align: center;
+}
+
+.whatido ul {
+  /* 居中元素 */
+  text-align: center;
+}
+
+/* 设置标题字体风格 */
+.info-section header h2 {
+  font-size: 28px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.info-section header h2:after {
+  content: "";
+  display: block;
+  border-bottom: 3px solid black;
+  width: 80px;
+  margin: 10px auto;
+}
+
+.info-section__description {
+  font-style: italic;
+}
+
+/* 消除 ul 默认设置 */
+.whatido__skill-list {
+  /* 消除默认样式 */
+  list-style: none;
+  /* 消除默认间隔 */
+  padding: 0;
+  margin: 0;
+
+  /* 浮动 */
+  overflow: hidden;
+}
+
+/* 为 li 设置背景 */
+.whatido__skill {
+  background-repeat: no-repeat;
+  background-position: center top;
+  padding-top: 100px;
+
+  float: left;
+  width: 33%;
+}
+.whatido__skill--code {
+  background-image: url(../img/skill-code.png);
+}
+.whatido__skill--design {
+  background-image: url(../img/skill-design.png);
+}
+.whatido__skill--product {
+  background-image: url(../img/skill-product.png);
+}
+
+/* 开始设置页面内容之 Education & Experience 部分 */
+.education-experience__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.education-experience__list li {
+  overflow: hidden;
+
+  margin-bottom: 20px;
+}
+
+.education-experience__list li img {
+  width: 180px;
+  float: left;
+
+  margin-right: 20px;
+}
+
+.education-experience__list li div {
+  overflow: hidden;
+}
+
+/* 开始设置页面内容之 Photos 部分 */
+.photos header {
+  margin-bottom: 30px;
+}
+
+.photos__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.photos__list:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.photos__list li {
+  /* 注意这里不能用 inline-block，否则会有额外的 margin */
+  float: left;
+  width: 25%;
+  padding: 5px;
+}
+
+.photos__list li img {
+  width: 100%;
+}
+
+/* 开始设置页面内容之 Get In Touch 部分 */
+.get-in-touch__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.get-in-touch__list:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.get-in-touch__list li {
+  float: left;
+  width: 25%;
+  text-align: center;
+}
+
+/* 开始设置页面内容之 Leave a Message 部分 */
+.contact input,
+.contact textarea {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding: 8px;
+  margin-bottom: 20px;
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.contact button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+
+  border: none;
+  border-radius: 9999px;
+
+  background: #ffd524;
+
+  cursor: pointer;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  box-shadow: 0 3px 0 #daae1d;
+}
+
+.contact form {
+  width: 40%;
+  margin: 0 auto; /* 居中 */
+}
+
+.form-item {
+  position: relative;
+}
+
+.form-item label {
+  position: absolute;
+
+  left: -100%;
+  width: 100%;
+  text-align: right;
+  padding: 8px;
+}
+
+/**********************************/
+/* 为移动设备适配 */
+@media only screen and (max-width: 480px) {
+  /* 调整外围容器宽度 */
+  .container {
+    width: 100%;
+  }
+
+  /* 减小标题字号 */
+  .main-header h1 {
+    font-size: 32px;
+  }
+
+  .main-nav ul li {
+    display: block;
+  }
+
+  /* 减小 padding */
+  .info-section {
+    padding: 10px;
+  }
+
+  /* 一行显示一个 item */
+  .whatido__skill {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  .education-experience header h2 span {
+    display: block;
+  }
+  .education-experience__list li img {
+    display: block;
+    float: none;  /* 取消 float */
+    margin: 0 auto; /* 居中 */
+  }
+  .photos__list li {
+    float: none;
+    width: 100%;
+  }
+  .get-in-touch__list li {
+    width: 50%;
+  }
+  .get-in-touch__list li img {
+    width: 80%;
+  }
+
+  .contact form {
+    width: 100%;
+  }
+  .contact button {
+    margin-bottom: 10px;
+  }
+  .form-item label {
+    position: static;
+    padding: 0px;
+  }
+}
