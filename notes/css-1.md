@@ -153,7 +153,7 @@ CSS 的三种形式：
 
 **外部样式表**
 
-在文档的 `<head>` 中用 `<link>` 标签引入外部样式表文件，以 `.css` 的文件形式存在。
+在文档中用 `<link>` 标签引入外部样式表文件，以 `.css` 的文件形式存在。(一般是在 `<head>` 中，在 `<body>` 中也是可以的)
 
     <head>
       <link rel="stylesheet" type="text/css" href="mystyle.css">
