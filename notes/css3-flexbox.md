@@ -3,6 +3,8 @@
 学习资源：
 
 1. [CSS3 FlexBox](http://www.runoob.com/css3/css3-flexbox.html)
+1. [Flex 布局教程：语法篇](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
+1. [学习 CSS 布局](http://zh.learnlayout.com/flexbox.html)
 
 ## CSS3 弹性盒子 (FlexBox)
 
@@ -19,11 +21,27 @@ flex-wrap       | 设置弹性盒子的子元素超出父容器时是否换行
 align-content   | 修改 flex-wrap 属性的行为，类似 align-items，但不是设置子元素对齐，而是设置行对齐
 flex-flow       | flex-direction 和 flex-wrap 的简写
 order           | 设置弹性盒子的子元素排列顺序
-flex            | 设置弹性盒子的子元素如何分配空间
-
-(漏了 flex-grow, flex-shrink, flex-basis ?)
+flex            | 设置弹性盒子的子元素如何分配空间，flex-grow flex-shrink flex-basis 的汇总简写属性
 
 在设置为 flex-box 布局的元素中，传统的布局失效了，块元素和行内元素不再有意义。设置为 flex-box 布局的元素，只会影响到此元素和它的所有子元素，不会影响它之外的元素。
+
+其中 6 个是设置在容器元素上：
+
+- flex-direction
+- flex-wrap
+- flex-flow
+- justify-content
+- align-items
+- align-content
+
+剩余 6 个是作用是设置在子元素上：
+
+- order
+- align-self
+- flex-grow
+- flex-shrink
+- flex-basis
+- flex
 
 **主轴与侧轴**
 
@@ -75,8 +93,8 @@ flex            | 设置弹性盒子的子元素如何分配空间
 值：
 
 - nowrap - 默认值，弹性容器为单行，该情况下子元素可能会溢出容器
-- wrap - 弹性容器为多行，溢出的子元素会被放置到新行
-- wrap-reverse - 同 wrap，但换行时从反方向开始排列
+- wrap - 弹性容器为多行，溢出的子元素会被放置到新行，且新行在原来行的下面
+- wrap-reverse - 同 wrap，但如果发生换行，新行在原来行的上面
 
 **align-content**
 
@@ -137,9 +155,11 @@ align-content 的值，和 align-items 的值基本相同：
 - stretch - 默认，各行将会伸展以占用剩余的空间
 - flex-start - 各行向弹性盒容器的起始位置堆叠
 - flex-end - 各行向弹性盒容器的结束位置堆叠
-- center -各行向弹性盒容器的中间位置堆叠
-- space-between -各行在弹性盒容器中平均分布
+- center - 各行向弹性盒容器的中间位置堆叠
+- space-between - 各行在弹性盒容器中平均分布
 - space-around - 各行在弹性盒容器中平均分布，两端保留子元素与子元素之间间距大小的一半
+
+在 [Flex 布局教程：语法篇](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html) 中总结 align-content 属性的作用是，定义多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。就是说，如果只有一根轴线 (没有换行产生)，align-content 是不起作用的，这时起作用的是 align-items，如果有多根轴 (即产生换行)，align-content 起作用，align-items 不起作用。
 
 **order**
 
@@ -151,8 +171,26 @@ align-content 的值，和 align-items 的值基本相同：
 
     flex: flex-grow flex-shrink flex-basis
 
-flex-box 就剩这个难点我一直没有很好的理解，尤其是后面两个值的意义... 结果这里一带而过，只好再看其它资料补充了。
-
 - flex-grow - 定义弹性盒子元素的扩展比率
 - flex-shrink - 定义弹性盒子元素的收缩比率
 - flex-basis - 定义弹性盒子元素的默认基准值
+
+该属性的默认值是 "0 1 auto"，另外有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。
+
+**flex-grow**
+
+flex-grow 属性定义项目的放大比例，默认为 0，即如果存在**剩余空间**，也不放大。可以差不多理解成 Android 中的 `layout_weight`，但这里针对的是剩余空间。
+
+如果所有项目的 flex-grow 属性都为 1，则它们将等分剩余空间 (如果有的话)。如果一个项目的 flex-grow 属性为 2，其他项目都为 1，则前者占据的剩余空间将比其他项多一倍。
+
+**flex-shrink**
+
+flex-shrink 属性定义了项目的缩小比例，默认为 1，即如果空间不足，该项目将缩小。
+
+如果所有项目的 flex-shrink 属性都为 1，当空间不足时，都将等比例缩小。如果一个项目的 flex-shrink 属性为0，其他项目都为 1，则空间不足时，前者不缩小。
+
+**flex-basis**
+
+flex-basis 属性定义了在分配多余空间之前，项目占据的主轴空间。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为 auto，即项目的本来大小。
+
+它可以设为跟 width 或 height 属性一样的值 (比如 350px)，则项目将占据固定空间。
