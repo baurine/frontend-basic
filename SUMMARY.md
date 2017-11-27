@@ -12,7 +12,8 @@
     * [CSS Grid](notes/css-grid.md)
     * [CSS 响应式 Web](notes/css-responsive.md)
     * [CSS Sike](notes/css-sike.md)
-* JavaScript
+* [JavaScript](notes/javascript-readme.md)
+    * [JavaScript Basic](notes/javascript-basic.md)
     * [JavaScript DOM](notes/javascript-dom.md)
 * Bootstrap
     * [Bootstrap3 - 1](notes/bootstrap3-1.md)
