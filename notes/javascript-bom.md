@@ -93,7 +93,7 @@ window.navigator 对象包含有关访问者浏览器的信息。主要用来获
 
 ## Window 弹窗
 
-可以在 JavaScript 中创建三种消息框：警告框、确认框、提示框。a
+可以在 JavaScript 中创建三种消息框：警告框、确认框、提示框。
 
 - 警告框 - alert()
 - 确认框 - confirm()
