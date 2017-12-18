@@ -23,6 +23,7 @@ Frontend basic knowledge about:
   * [CSS Sike](notes/css-sike.md)
 * [JavaScript](notes/javascript-readme.md)
   * [JavaScript Basic](notes/javascript-basic.md)
+  * [JavaScript BOM](notes/javascript-bom.md)
   * [JavaScript DOM](notes/javascript-dom.md)
 * Bootstrap
   * [Bootstrap3 - 1](notes/bootstrap3-1.md)
