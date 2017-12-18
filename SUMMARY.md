@@ -16,6 +16,7 @@
     * [JavaScript Basic](notes/javascript-basic.md)
     * [JavaScript BOM](notes/javascript-bom.md)
     * [JavaScript DOM](notes/javascript-dom.md)
+    * [jQuery](notes/javascript-jquery.md)
 * Bootstrap
     * [Bootstrap3 - 1](notes/bootstrap3-1.md)
     * [Bootstrap3 - 2](notes/bootstrap3-2.md)
