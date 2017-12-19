@@ -8,7 +8,7 @@ Frontend basic knowledge about:
 1. JavaScript / DOM API / jQuery
 1. bootstrap
 
-## Content Table
+## Notes
 
 * HTML
   * [HTML](notes/html.md)
@@ -18,6 +18,7 @@ Frontend basic knowledge about:
   * [CSS - 2](notes/css-2.md)
   * [CSS3](notes/css3.md)
   * [CSS3 FlexBox](notes/css3-flexbox.md)
+  * [ReactNative FlexBox](notes/react-native-flexbox.md)
   * [CSS Grid](notes/css-grid.md)
   * [CSS 响应式 Web](notes/css-responsive.md)
   * [CSS Sike](notes/css-sike.md)
@@ -30,6 +31,10 @@ Frontend basic knowledge about:
   * [Bootstrap3 - 1](notes/bootstrap3-1.md)
   * [Bootstrap3 - 2](notes/bootstrap3-2.md)
   * [Bootstrap4](notes/bootstrap4.md)
+
+相关的其它项目：
+
+- [JS Study](https://github.com/baurine/js-study)
 
 ## Demos
 
