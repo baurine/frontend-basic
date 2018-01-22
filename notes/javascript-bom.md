@@ -106,7 +106,7 @@ window.navigator 对象包含有关访问者浏览器的信息。主要用来获
 
 ## Cookie
 
-(cookie 是 DOM 的内容，怎么放到 BOM 这里来了?)
+~~(cookie 是 DOM 的内容，怎么放到 BOM 这里来了?)~~ cookie 是由浏览器来管理的，所以当然是属于 BOM 的内容。
 
 JavaScript 可以使用 document.cookie 属性来创建 、读取、及删除 cookie。
 
