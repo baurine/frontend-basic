@@ -76,6 +76,16 @@ $(selector) 得到的是一个 jQuery 的对象，里面封装了 DOM element �
 - 文档/窗口事件：load, resize, scroll, unload
 - 文档就绪事件：ready (`$(document).ready()`)
 
+全部的 jQuery 事件看参考 - [jQuery 事件方法](http://www.runoob.com/jquery/jquery-ref-events.html)
+
+有一个 on() 方法平时也很常见，它可以为元素添加任意类型的事件，也可以为元素同时添加多个类型的事件，如下所示：
+
+    $(document).ready(function(){
+      $("p").on("mouseover mouseout",function(){
+        $("p").toggleClass("intro");
+      });
+    });
+
 ## jQuery 效果
 
 其实主要是指 jQuery 对元素的 CSS 属性的动画操作。
@@ -297,32 +307,36 @@ attr() 也支持回调函数。
 
 jQuery 与 AJAX 的关系。AJAX 是可以独立使用的，正如 HTML DOM，但写起来比较麻烦，而 jQuery 对它进行了封装，简化了写法，使之使用更加方便。
 
-### AJAX load() 方法
+[jQuery AJAX 的官方完整文档](http://api.jquery.com/category/ajax/)
 
-jQuery load() 方法是简单但强大的 AJAX 方法。load() 方法从服务器加载数据，并把返回的数据放入被选元素中。
+可以看出 jQuery 对 AJAX 的封装，封装了一个底层的 $.ajax() 方法，然后又用 $.ajax() 封装了几个更方便上层使用的快捷方法，主要是 $.get(), $.post(), $.getJSON(), $.getScript(), 以及 $(el).load()。
 
-语法：
+- 封装的底层方法
+  - $.ajax()
+  - $.ajaxPrefilter() / $.ajaxSetup() / $.ajaxTransport()
 
-    $(selector).load(URL, data, callback);
+- 封装的上层方法
+  - $.get()
+  - $.post()
+  - $.getJSON() - get 请求 JSON
+  - $.getScript() - get 请求一段 js 代码，得到后执行它
+  - $(el).load() - 注意，这个方法是作用是 jQuery DOM 元素上的
 
-示例：
-
-    $("#div1").load("demo_test.txt");
-
-### get() 和 post() 方法
-
-GET:
+**get()**
 
     $.get(URL, callback)
 
-POST:
+**post()**
 
     $.post(URL, data, callback)
 
-其它封装的方法：
+**load()**
 
-- `$.getJSON()`
-- `$.ajax()`
+jQuery load() 方法是简单但强大的 AJAX 方法。load() 方法从服务器加载数据，并把返回的数据放入被选元素中。
+
+    $(selector).load(URL, data, callback);
+
+    $("#div1").load("demo_test.txt");
 
 ## jQuery 其它
 
