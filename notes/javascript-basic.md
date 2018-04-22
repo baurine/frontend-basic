@@ -333,7 +333,7 @@ addEventListener() 方法允许你在 HTML DOM 对象添加事件监听，HTML D
 
 **事件冒泡与事件捕获**
 
-事件传递有两种方式：冒泡与捕获。
+事件传递有两种方式：冒泡 (bubbling) 与捕获 (capturing)。
 
 - 在冒泡中，内部元素的事件会先被触发，然后再触发外部元素。
 - 在捕获中，外部元素的事件会先被触发，然后才会触发内部元素的事件。
@@ -342,11 +342,42 @@ addEventListener() 方法可以指定 "useCapture" 参数来设置传递类型�
 
     addEventListener(event, function, useCapture);
 
-默认值为 false，即冒泡传递，当值为 true 时，事件使用捕获传递。
+默认值是 false，表示在事件冒泡阶段调用事件处理函数；如果参数为 true，则表示在事件捕获阶段调用处理函数。
 
 **removeEventListener()**
 
     element.removeEventListener("mousemove", myFunction);
+
+补充：
+
+- [JS 中事件冒泡与捕获](https://segmentfault.com/a/1190000005654451)
+
+> 事件冒泡和事件捕获分别由微软和网景公司提出，这两个概念都是为了解决页面中事件流（事件发生顺序）的问题。
+
+> 网景和微软曾经的战争还是比较火热的，当时，网景主张捕获方式，微软主张冒泡方式。后来 w3c 采用折中的方式，平息了战火，制定了统一的标准 -- 先捕获再冒泡。
+
+事件代理，不在每个子元素上单独绑定事件处理函数，而是统一在父元素上绑定一个事件处理函数，然后在这个事件处理函数，根据实际触发事件的元素 (通过参数 event.target 区分)，再去进行不同的处理。
+
+这样的好处是：
+
+1. 减少事件绑定
+1. 有些子元素是动态生成的。比如有一个 ul 元素，文档刚加载时，有 3 个 li，然后你在这时候给每个 li 绑定了一个 event listener，之后又动态创建了 2 个新的 li，这时候新创建的 li 就没有 event listener，需要手动再给它加上，如果把 event listener 统一绑定到 ul 上，无论 li 怎么动态变化，事件都能得到正确处理。
+
+**stopPropgation()**
+
+默认情况下，事件触发后，会一直传递下去，如果我们想阻止事件继续传播，那我们可以调用 `event.stopPropgation()`，propgation 是传播的意思，它不仅阻止捕获，也阻止冒泡。
+
+**preventDefault()**
+
+首先，preventDefault 和 stopPropgation 没有半毛钱关系，它们各司其职，如果非说要有点关系的话，那就是它们都和元素的事件有关系。
+
+stopPropgation 是阻止事件的继续传播，而 preventDefault 是阻止元素自身的默认事件发生，比如点击 a 标签会打开链接, 点击 form 中的 input 会提交 form。
+
+在 a 标签调用 stopPropgation 并不会阻止它打开链接，但会阻止它把点击事件继续传播。
+
+在 a 标签调用 preventDefault 会阻止它打开链接，但不会阻止它把点击事件继续传播。
+
+如果在 a 标签上同时调用 stopPropgation 和 preventDefault，才会同时阻止它打开链接和阻止事件继续传播。
 
 ### 操作 HTML DOM 元素
 
