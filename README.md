@@ -36,6 +36,10 @@ Frontend basic knowledge about:
 
 - [JS Study](https://github.com/baurine/js-study)
 
+  [JS Study](https://github.com/baurine/js-study) repo 更偏向于记录纯 js 相关，或与后端开发相关，或与 React/Vue 这些现代前端框架相关的内容。
+
+  与 HTML/DOM/CSS 相关的内容记录在此 repo 中。
+
 ## Demos
 
 1. [Profile Page](http://baurine.github.io/sike-css/)
