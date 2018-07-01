@@ -21,12 +21,56 @@
           background: black url('images/hero-3.jpg') center / cover;
         }
       }
+
+      .center, .left, .right {
+        display: flex;
+        align-items: center;
+      }
+      .center {
+        justify-content: center;
+      }
+      .left {
+        justify-content: flex-start;
+      }
+      .right {
+        justify-content: flex-end;
+      }
+
+      @media (max-width: 1024px) {
+        .desktop {
+          display: none;
+        }
+      }
     </style>
   </head>
 
   <body>
 
     <section class="hero is-fullheight">
+      <nav class="hero-head">
+        <div class="columns is-mobile is-marginless heading has-text-weight-bold">
+          <div class="column left">
+            <figure class="navbar-item image">
+              <img src="images/tesla.svg" style="width: 6.25rem; height: 1rem;"/>
+            </figure>
+          </div>
+          <div class="column center desktop">
+            <p class="navbar-item has-text-black">MODEL S</p>
+            <p class="navbar-item has-text-black">MODEL X</p>
+            <p class="navbar-item has-text-black">MODEL 3</p>
+            <p class="navbar-item has-text-white">ROADSTER</p>
+            <p class="navbar-item has-text-black">ENERGY</p>
+          </div>
+          <div class="column right">
+            <p class="navbar-item desktop has-text-black">SHOP</p>
+            <p class="navbar-item desktop has-text-black">SIGN IN</p>
+            <figure class="navbar-item image has-text-black center">
+              <i class="fas fa-bars" style="width: 1rem; height: 1rem;"></i>
+            </figure>
+          </div>
+        </div>
+      </nav>
+
 
     </section>
 
