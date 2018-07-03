@@ -310,7 +310,7 @@ Generic family | 字体系列                       | 说明
 ---------------|------------------------------|---------------------------------------
 Serif          | Times New Roman / Georgia    | Serif 字体中字符在行的末端拥有额外的装饰
 Sans-serif     | Arial / Verdana              | Sans 是指无衬线，这些字体在末端没有额外的装饰
-Monospace      | Courier New / Lucida Console | 所有的等宽字符具有相同的宽度
+Monospace      | Courier New / Lucida Console | 所有的等宽字符具有相同的宽度 (适合写代码)
 
 (终于多明白了一些字体的知识!)
 
@@ -373,6 +373,8 @@ font-family 属性应该设置几个字体名称作为一种 "后备" (fallback)
 - a:visited - 用户已访问过的链接
 - a:hover - 当用户鼠标放在链接上时
 - a:active - 链接被点击的那一刻
+
+- a:focus - (当获得焦点时?)
 
 (注意，上面四个顺序是固定的，可以这样记：L-O-VE H-A-TE)
 

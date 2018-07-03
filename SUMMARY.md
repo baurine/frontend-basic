@@ -18,7 +18,8 @@
     * [JavaScript BOM](notes/javascript-bom.md)
     * [JavaScript DOM](notes/javascript-dom.md)
     * [jQuery](notes/javascript-jquery.md)
-* Bootstrap
-    * [Bootstrap3 - 1](notes/bootstrap3-1.md)
-    * [Bootstrap3 - 2](notes/bootstrap3-2.md)
-    * [Bootstrap4](notes/bootstrap4.md)
+* CSS Framework
+  * [Bootstrap3 - 1](notes/bootstrap3-1.md)
+  * [Bootstrap3 - 2](notes/bootstrap3-2.md)
+  * [Bootstrap4](notes/bootstrap4.md)
+  * [Bulma](notes/bulma.md)

@@ -27,10 +27,11 @@ Frontend basic knowledge about:
   * [JavaScript BOM](notes/javascript-bom.md)
   * [JavaScript DOM](notes/javascript-dom.md)
   * [jQuery](notes/javascript-jquery.md)
-* Bootstrap
+* CSS Framework
   * [Bootstrap3 - 1](notes/bootstrap3-1.md)
   * [Bootstrap3 - 2](notes/bootstrap3-2.md)
   * [Bootstrap4](notes/bootstrap4.md)
+  * [Bulma](notes/bulma.md)
 
 相关的其它项目：
 
@@ -45,3 +46,13 @@ Frontend basic knowledge about:
 1. [Profile Page](http://baurine.github.io/sike-css/)
 
    ![](./art/css-profile-page.png)
+
+1. Bulma Practice
+
+   ![](./art/learn-bulma/lesson5-slides.png)
+
+   ![](./art/learn-bulma/lesson9-blog.png)
+
+   ![](./art/learn-bulma/lesson13-1.png)
+
+   ![](./art/learn-bulma/lesson13-2.png)
