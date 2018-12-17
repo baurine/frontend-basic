@@ -4,13 +4,14 @@
 
 1. [jQuery 教程](http://www.runoob.com/jquery/jquery-tutorial.html)
 
-jQuery 是一个 JavaScript 库，主要是封装了原生 JavaScript DOM API，极大地简化了对 DOM 的操作。
+jQuery 是一个 JavaScript 库，主要是封装了原生 JavaScript DOM API，极大地简化了对 DOM 的操作，以及对 AJAX 的封装极大地简化了对网络请求的操作。
 
-(当然，jQuery 算是一个比较重的库，如果你的工程只是少量地操作 DOM，那么直接用原生的 DOM API 就行了，犯不着用上 jQuery，而且 HTML5 之后，DOM API 也加入了一些类似 jQuery 的 API，可以胜任一些 jQuery 的工作。)
+(当然，jQuery 算是一个比较重的库，如果你的工程只是少量地操作 DOM，那么直接用原生的 DOM API 就行了，犯不着用上 jQuery，而且 HTML5 之后，DOM API 也加入了一些类似 jQuery 的 API，可以胜任一些 jQuery 的工作。ES6 对增加了 fetch API 用来实现 AJAX 请求。)
 
 (另外，在 MVVM 时代的前端开发，jQuery 已经不推荐使用了，虽然如此，但我们还是要了解它。)
 
-[You Dont Need jQuery](https://github.com/nefe/You-Dont-Need-jQuery/blob/master/README.zh-CN.md)
+- [You Don't Need jQuery!](https://blog.garstasio.com/you-dont-need-jquery/)
+- [You Dont Need jQuery](https://github.com/nefe/You-Dont-Need-jQuery/blob/master/README.zh-CN.md)
 
 一个 jQuery 简单的示例：
 
