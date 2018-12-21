@@ -189,8 +189,14 @@ flex-shrink 属性定义了项目的缩小比例，默认为 1，即如果空间
 
 如果所有项目的 flex-shrink 属性都为 1，当空间不足时，都将等比例缩小。如果一个项目的 flex-shrink 属性为0，其他项目都为 1，则空间不足时，前者不缩小。
 
+注意，flex-shrink 跟剩余空间无关，本来空间就不够，哪还有剩余空间啊。
+
 **flex-basis**
 
 flex-basis 属性定义了在分配多余空间之前，项目占据的主轴空间。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为 auto，即项目的本来大小。
 
 它可以设为跟 width 或 height 属性一样的值 (比如 350px)，则项目将占据固定空间。
+
+这篇文章对 flex-grow 与 flex-shrink 解释得比较详细：
+
+- [详解 flex-grow 与 flex-shrink](https://github.com/xieranmaya/blog/issues/9)
