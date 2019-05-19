@@ -6,6 +6,25 @@
 
 BOM: Browser Object Model，浏览器对象模型，使 JavaScript 有能力与浏览器 "对话"。
 
+## BOM & DOM
+
+BOM 和 DOM 的关系，一张图可以明白。简单地说，就是 DOM 是 BOM 的成员之一。
+
+![](../art/bom-dom.jpg)
+
+BOM 包括以下内容：
+
+- document (DOM)
+- frames
+- history
+- location
+- navigator
+- screen
+
+ref:
+
+- [图解 BOM 与 DOM 的区别与联系](https://www.jianshu.com/p/86acc95f1eb8)
+
 ## JavaScript Window
 
 ### Window 对象
