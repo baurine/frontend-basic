@@ -22,6 +22,7 @@ Frontend basic knowledge about:
   * [CSS Grid](notes/css-grid.md)
   * [CSS 响应式 Web](notes/css-responsive.md)
   * [CSS Sike](notes/css-sike.md)
+  * [CSS Misc](notes/css-misc.md)
   * [Color](notes/color.md)
 * [JavaScript](notes/javascript-readme.md)
   * [JavaScript Basic](notes/javascript-basic.md)
