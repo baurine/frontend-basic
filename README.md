@@ -16,6 +16,8 @@ Frontend basic knowledge about:
 * CSS
   * [CSS - 1](notes/css-1.md)
   * [CSS - 2](notes/css-2.md)
+  * [《CSS 世界》笔记 1](notes/css-world-note-1.md)
+  * [《CSS 世界》笔记 2](notes/css-world-note-2.md)
   * [CSS3](notes/css3.md)
   * [CSS3 FlexBox](notes/css3-flexbox.md)
   * [ReactNative FlexBox](notes/react-native-flexbox.md)
