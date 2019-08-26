@@ -8,6 +8,14 @@ Frontend basic knowledge about:
 1. JavaScript / DOM API / jQuery
 1. bootstrap
 
+我的一些理解：
+
+web 上实现 ui 是声明式的，html 和 css 都是声明式的。而 android 和 iOS 上自绘 view 是命令式的。
+
+声明式的代码易于阅读和理解，但声明式隐藏了实现细节，实现细节在底层，不由自己掌控，不容易扩展，不灵活，但命令式允许自己掌控更多细节，容易扩展，更灵活，虽然实现可能会很麻烦。
+
+[W3schools - HOW TO](https://www.w3schools.com/howto/default.asp) 这是个宝库啊，汇总了很多 ui 和交互的 html/css/js 实现，比如 checkbox 的自定义实现，Parallax Scrolling，各种 form 布局，drag element ...
+
 ## Notes
 
 * HTML

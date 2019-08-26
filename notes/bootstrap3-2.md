@@ -130,7 +130,6 @@ Bootstrap 中的面包屑导航 (Breadcrumbs) 是一个简单的带有 .breadcru
 
 .pagination, .pager class
 
-
 ### 标签
 
 .label .label-primary/success/info/warning/danger
@@ -197,11 +196,11 @@ Bootstrap 中的面包屑导航 (Breadcrumbs) 是一个简单的带有 .breadcru
 
 示例：
 
-<div class="panel panel-default">
-  <div class="panel-body">
-    这是一个基本的面板
-  </div>
-</div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        这是一个基本的面板
+      </div>
+    </div>
 
 ### Well
 
