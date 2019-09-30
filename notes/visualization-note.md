@@ -3,10 +3,9 @@
 web 上提供了三种数据可视化的方法：
 
 - Flash/SilverLight (dead)
-- svg
-- canvas
+- SVG (Scalable Vector Graphic)
+- Canvas
 - WebGL
-- wasm (??)
 
 svg 和 canvas 用于 2D 绘图，各有千秋，但用于数据可视化的话可能还是 svg 用得多一些，canvas 多用于 H5 小游戏。
 
@@ -26,4 +25,10 @@ WebGL 是用来在实现 3D 绘图的，比较复杂，需要一些专业的知�
 
 - [D3.js 入门教程](http://wiki.jikexueyuan.com/project/d3wiki/)
 
-最后，突然想到 AutoDesk 把它们的软件通过 wasm 整体移植到了浏览器中，那么未来会不会用 wasm 作为数据可视化的一种方法呢。
+分类笔记：
+
+- [Canvas 及动画](../code/visualize/canvas-and-animation/README.md)
+
+其它资源：
+
+- [AntV 文档](https://www.yuque.com/antv)
