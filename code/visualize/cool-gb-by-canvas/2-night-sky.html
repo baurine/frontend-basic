@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>cool bg by canvas</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        /* cursor: none; */
+        background: black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+      var canvas = document.getElementById('canvas'),
+        context = canvas.getContext('2d'),
+        rounds = [],
+        WIDTH,
+        HEIGHT,
+        roundCount = 80
+
+      WIDTH = document.documentElement.clientWidth
+      HEIGHT = document.documentElement.clientHeight
+
+      canvas.width = WIDTH
+      canvas.height = HEIGHT
+
+      function RoundItem(index, x, y, canvasCtx) {
+        this.index = index
+        this.x = x
+        this.y = y
+        this.canvasCtx = canvasCtx
+
+        this.r = Math.random() * 2 + 1
+        var alpha = (Math.floor(Math.random() * 10) + 1) / 10 / 2
+        this.color = `rgba(255,255,255,${alpha})`
+      }
+
+      RoundItem.prototype.draw = function() {
+        this.canvasCtx.fillStyle = this.color
+        this.canvasCtx.shadowBlur = this.r * 2
+
+        this.canvasCtx.beginPath()
+        this.canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false)
+        this.canvasCtx.closePath()
+        this.canvasCtx.fill()
+      }
+
+      function init() {
+        for (let i = 0; i < roundCount; i++) {
+          rounds[i] = new RoundItem(
+            i,
+            Math.random() * WIDTH,
+            Math.random() * HEIGHT,
+            context
+          )
+          rounds[i].draw()
+        }
+      }
+
+      init()
+    </script>
+  </body>
+</html>
