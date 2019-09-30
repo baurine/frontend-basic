@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>cool bg by canvas</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        /* cursor: none; */
+        background: black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+      var canvas = document.getElementById('canvas'),
+        context = canvas.getContext('2d'),
+        WIDTH,
+        HEIGHT,
+        param = {
+          color: false,
+          r: 0.9,
+          o: 0.09
+        },
+        color_hue,
+        color_hls,
+        rounds = []
+
+      WIDTH = document.documentElement.clientWidth
+      HEIGHT = document.documentElement.clientHeight
+
+      canvas.width = WIDTH
+      canvas.height = HEIGHT
+
+      canvas.onmousemove = function(event) {
+        rounds.push({
+          mouseX: event.clientX,
+          mouseY: event.clientY,
+          r: param.r,
+          o: 1
+        })
+      }
+
+      if (param.color) {
+        color_hls = param.color
+      } else {
+        color_hue = Math.random() * 360
+      }
+
+      function animate() {
+        if (!param.color) {
+          color_hue += 0.1
+          color_hls = `hsl(${color_hue}, 100%, 80%)`
+        }
+
+        context.clearRect(0, 0, WIDTH, HEIGHT)
+
+        rounds.forEach((round, index) => {
+          context.fillStyle = color_hls
+          context.beginPath()
+          context.arc(round.mouseX, round.mouseY, round.r, 0, Math.PI * 2)
+          context.closePath()
+          context.fill()
+
+          round.r += param.r
+          round.o -= param.o
+        })
+        rounds = rounds.filter(round => round.o > 0)
+
+        requestAnimationFrame(animate)
+      }
+
+      animate()
+    </script>
+  </body>
+</html>
