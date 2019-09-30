@@ -23,10 +23,10 @@
     <script>
       var canvas = document.getElementById('canvas'),
         context = canvas.getContext('2d'),
-        rounds = [],
         WIDTH,
         HEIGHT,
-        roundCount = 80
+        roundCount = 80,
+        rounds = []
 
       WIDTH = document.documentElement.clientWidth
       HEIGHT = document.documentElement.clientHeight
@@ -55,6 +55,14 @@
         this.canvasCtx.fill()
       }
 
+      RoundItem.prototype.move = function() {
+        this.y = this.y - 0.15
+        if (this.y < -10) {
+          this.y = HEIGHT + 10
+        }
+        this.draw()
+      }
+
       function init() {
         for (let i = 0; i < roundCount; i++) {
           rounds[i] = new RoundItem(
@@ -63,8 +71,14 @@
             Math.random() * HEIGHT,
             context
           )
-          rounds[i].draw()
         }
+        animate()
+      }
+
+      function animate() {
+        context.clearRect(0, 0, WIDTH, HEIGHT)
+        rounds.forEach(round => round.move())
+        requestAnimationFrame(animate)
       }
 
       init()
