@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>SVG</title>
+    <style>
+      .motion-path {
+        width: 600px;
+        height: 400px;
+        position: relative;
+      }
+      .square {
+        width: 30px;
+        height: 30px;
+        background-color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="motionPath">
+      <div class="motion-path">
+        <div class="square"></div>
+        <svg width="600" height="400" viewBox="0 0 600 400">
+          <path
+            id="curpath"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+            d="M11.6,246.9c0,0,143.1-274.1,267.8-137.9s124.7,136.2,124.7,136.2L11.6,246.9z"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js"></script>
+    <script>
+      var path = anime.path('path')
+
+      anime({
+        targets: '.square',
+        translateX: path('x'),
+        translateY: path('y'),
+        rotate: path('angle'),
+        duration: 3000,
+        loop: true,
+        easing: 'linear'
+      })
+    </script>
+  </body>
+</html>
