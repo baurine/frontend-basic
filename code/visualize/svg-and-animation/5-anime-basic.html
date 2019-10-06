@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>SVG</title>
+    <style>
+      .box {
+        width: 50px;
+        height: 50px;
+        margin-top: 10px;
+        background-color: rgb(251, 21, 90);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js"></script>
+    <script>
+      function animation() {
+        // anime({
+        //   targets: '.box',
+        //   translateX: 300,
+        //   duration: 800,
+        //   delay: 600,
+        //   easing: 'easeInOutSine',
+        //   loop: true
+        // })
+        anime({
+          targets: '.box',
+          translateX: (elm, index, t) => index * 150,
+          backgroundColor: [
+            { value: '#000' }, // Or #FFFFFF
+            { value: 'rgb(255, 0, 0)' },
+            { value: 'hsl(100, 60%, 60%)' }
+          ],
+          duration: 1200,
+          delay: (elm, index, t) => index * 20,
+          easing: 'easeInOutSine',
+          loop: true,
+          direction: 'alternate'
+        })
+      }
+      window.onload = function() {
+        animation()
+      }
+    </script>
+  </body>
+</html>
