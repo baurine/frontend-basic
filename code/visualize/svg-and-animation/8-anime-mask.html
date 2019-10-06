@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>SVG</title>
+    <style></style>
+  </head>
+  <body>
+    <svg
+      width="500"
+      height="500"
+      viewBox="0 0 600 600"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xml:space="preserve"
+      xmlns:serif="http://www.serif.com/"
+    >
+      <defs>
+        <clipPath id="Mask">
+          <path
+            d="M64,168c0,0-30-123,80-108s91,54,182,64s137-83,163-57s119,203-37,214s-205,89-299,22
+        S64,168,64,168z"
+          />
+        </clipPath>
+      </defs>
+      <image
+        width="900px"
+        height="600px"
+        xlink:href="http://ue.qzone.qq.com/janilydemo/mask/clippath/img.jpg"
+        clip-path="url(#Mask)"
+      />
+    </svg>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js"></script>
+    <script>
+      var morph = anime({
+        targets: 'path',
+        d: [
+          {
+            value:
+              'M64,168c0,0-30-123,80-108s91,54,182,64s95,10,121,36s161,110,5,121s-239,115.9-333,48.9S64,168,64,168z'
+          }
+        ],
+        easing: 'easeInOutQuad',
+        duration: 3000,
+        direction: 'alternate',
+        loop: true
+      })
+    </script>
+  </body>
+</html>

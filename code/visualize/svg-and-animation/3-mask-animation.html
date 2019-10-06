@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>SVG Mask Animation</title>
+    <style>
+      .visible #cd-image-1 circle {
+        animation: visible-clippath 1s linear forwards;
+      }
+      @keyframes visible-clippath {
+        to {
+          r: 1364;
+        }
+      }
+    </style>
+    <script>
+      function maskAnimation() {
+        var el = document.getElementById('mask-animation-wrapper')
+        el.addEventListener('click', function() {
+          if (this.classList.contains('visible')) {
+            this.classList.remove('visible')
+          } else {
+            this.classList.add('visible')
+          }
+        })
+      }
+
+      window.onload = function() {
+        maskAnimation()
+      }
+    </script>
+  </head>
+  <body>
+    <svg version="1.1">
+      <defs>
+        <clipPath id="cut-off-bottom">
+          <rect x="0" y="0" width="200" height="100" />
+        </clipPath>
+      </defs>
+      <circle cx="100" cy="100" r="100" clip-path="url(#cut-off-bottom)" />
+    </svg>
+
+    <svg version="1.1">
+      <defs>
+        <linearGradient id="Gradient">
+          <stop offset="0" stop-color="white" stop-opacity="0" />
+          <stop offset="1" stop-color="white" stop-opacity="1" />
+        </linearGradient>
+        <mask id="Mask">
+          <rect x="0" y="0" width="200" height="200" fill="url(#Gradient)" />
+        </mask>
+      </defs>
+      <rect x="0" y="0" width="200" height="200" fill="green" />
+      <rect x="0" y="0" width="200" height="200" fill="red" mask="url(#Mask)" />
+    </svg>
+
+    <div id="mask-animation-wrapper">
+      <svg viewBox="0 0 1400 800">
+        <title>Animated clip-path SVG</title>
+        <defs>
+          <clipPath id="cd-image-1">
+            <circle id="cd-circle-1" cx="110" cy="400" r="60" />
+          </clipPath>
+        </defs>
+        <image
+          height="800px"
+          width="1400px"
+          clip-path="url(#cd-image-1)"
+          xlink:href="http://ue.qzone.qq.com/janilydemo/mask/clippath/img.jpg"
+        ></image>
+      </svg>
+    </div>
+  </body>
+</html>
