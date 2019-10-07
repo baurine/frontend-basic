@@ -349,3 +349,32 @@ gs.append('rect')
 
 当鼠标滑过当前 rect 时，将填充颜色过渡为 yellow，滑出后再过渡回 blue。
 
+### 第十二章 — D3.js 中各种精美的图形
+
+D3 提供了一些制作常见图形的函数。D3 中一些常见的图形：
+
+- bubble chart
+- packing chart
+- bundling chart
+- force chart
+- chord chart
+- pie chart
+- tree chart
+- map chart
+
+### 第十三章 — 饼状图
+
+绘制饼状图所需 API：
+
+- d3.arc().innerRadius(radius).outerRadiu(radius) - 弧形生成器
+- d3.pie(dataset) - 将原始数组生成绘制饼状图所需数组，用于和 SVG 元素进行绑定
+- d3.arc().centroid() - 弧形中心位置，用来绘制文本时所需坐标的方法
+- d3.schemeCategory10 - 颜色
+
+具体代码见示例。
+
+### 第十四章 — 力导向图
+
+### 第十五章 — 树状图
+
+### 第十六章 — 中国地图
