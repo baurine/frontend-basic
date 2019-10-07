@@ -25,6 +25,7 @@ WebGL 是用来在实现 3D 绘图的，比较复杂，需要一些专业的知�
 
 - [D3.js 入门教程](http://wiki.jikexueyuan.com/project/d3wiki/)
 - [D3.js 的 v5 版本入门教程](https://blog.csdn.net/qq_34414916/article/category/7608878)
+- [Learn D3.js step by step](https://www.d3indepth.com/)
 
 分类笔记：
 

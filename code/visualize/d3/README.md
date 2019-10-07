@@ -13,12 +13,12 @@ D3.js，类似 SVG 中的 jQuery，同样拥有强大的选择器，链式调用
 - 第三章 — 选择元素和绑定数据
 - 第四章 — 理解 Update、Enter、Exit
 - 第五章 — 选择、插入、删除元素
-- 第六章 —做一个简单的图表
+- 第六章 — 做一个简单的图表
 - 第七章 — 比例尺的使用
 - 第八章 — 坐标轴
-- 第九章 —完整的柱状图
-- 第十章 —让图表动起来
-- 第十一章 —交互式操作
+- 第九章 — 完整的柱状图
+- 第十章 — 让图表动起来
+- 第十一章 — 交互式操作
 - 第十二章 — D3.js 中各种精美的图形
 - 第十三章 — 饼状图
 - 第十四章 — 力导向图
@@ -137,5 +137,120 @@ update 和 exit 示例代码：
 - 删除
   - remove()
 
+### 第六章 — 做一个简单的图表
 
+在 svg 上用 rect 画矩形，设置它的 x, y, width, height, fill 属性。
 
+核心代码：
+
+```html
+<body>
+  <svg width="960" height="600"></svg>
+  <script>
+    var margin = { top: 60, right: 60, bottom: 60, left: 60 }
+    var dataset = [250, 210, 170, 130, 90]
+
+    var svg = d3.select('svg')
+    var g = svg
+      .append('g')
+      .attr('transform', `translate(${margin.top}, ${margin.left})`)
+
+    var rectHeight = 30
+    g.selectAll('rect')
+      .data(dataset)
+      .enter()
+      .append('rect')
+      .attr('x', 20)
+      .attr('y', function(d, i) {
+        return i * rectHeight
+      })
+      .attr('width', function(d, i) {
+        return d
+      })
+      .attr('height', function(d, i) {
+        return rectHeight - 5
+      })
+      .attr('fill', 'blue')
+  </script>
+</body>
+```
+
+`g.selectAll('rect').data(dataset).enter().append('rect')` 在第四章已经解释了，这里表示填充不足的 rect 元素。(不过我表示好奇，如果 selectAll 和 append 的元素类型不相同会怎么样，待试验。- 经过测试发现也是可以的，也不会报 warning)
+
+绘制图表，主要就是设置好坐标系，必要时还需要设置坐标系的比例，然后设置好各个形状的尺寸。
+
+### 第七章 — 比例尺的使用
+
+两种比例尺：
+
+- 线性比例尺 - d3.scaleLinear()，按比例
+- 序数比例尺 - d3.scaleOrdinal()，一一对应，有点枚举的意思
+
+使用示例：
+
+```js
+// scaleLinear
+var dataset = [1.2, 2.3, 0.9, 1.5, 3.3]
+var min = d3.min(dataset)
+var max = d3.max(dataset)
+var scaleLinear = d3
+  .scaleLinear()
+  .domain([min, max])
+  .range([0, 300])
+document.write('scaleLinear(0.9): ', scaleLinear(0.9)) // output: 0
+document.write('scaleLinear(3.3): ', scaleLinear(3.3)) // output: 300
+
+// scaleOrdinal
+var index = [0, 1, 2, 3, 4]
+var color = ['red', 'blue', 'yellow', 'black', 'green']
+var scaleOrdinal = d3
+  .scaleOrdinal()
+  .domain(index)
+  .range(color)
+document.write('scaleOrdinal(1) 输出：' + scaleOrdinal(1)) // blue
+```
+
+### 第八章 — 坐标轴
+
+D3 中没有现成的坐标轴图形，需要我们自己用其他组件拼凑而成。D3 中提供了坐标轴组件，使得我们在 SVG 中绘制一个坐标轴变得像添加一个普通元素那样简单。
+
+关键函数：call()。首先利用 D3 提供的坐标轴函数构造出一个坐标轴，然后选择 SVG DOM 元素，在 DOM 元素上调用 call(axis)。
+
+在第六章的简单柱状图基础上加上一个 x 轴，示例代码：
+
+```js
+// 定义一个坐标轴 - x 轴
+var xAxis = d3.axisBottom(scaleLinear).ticks(7)
+// 将 x 轴添加到 <g> 中
+g.append('g')
+  .attr('transform', `translate(20, ${dataset.length * rectHeight})`)
+  .call(xAxis)
+```
+
+我发现 SVG 中的这个 `<g>` 标签有点类似 html 中的 `<div>` 标签。
+
+### 第九章 — 完整的柱状图
+
+一个完整的柱状图，包括 x 轴，y 轴，柱状，文字。
+
+相比第八章需要多使用两个 API:
+
+- d3.scaleBand() - 也算序数比例尺的一种
+- d3.rangeRound() - 返回一个等差数列
+
+关于 D3 中常用的比例尺，可以参看这篇文章 - [D3 中常用的比例尺](https://segmentfault.com/a/1190000011006780)
+
+示例：
+
+```js
+var xScale = d3
+  .scaleBand()
+  .domain(d3.range(dataset.length))
+  .rangeRound([0, width - margin.left - margin.right])
+var xAxis = d3.axisBottom(xScale)
+
+// x 轴
+g.append('g')
+  .attr('transform', `translate(0, ${height - margin.top - margin.bottom})`)
+  .call(xAxis)
+```
