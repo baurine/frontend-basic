@@ -310,3 +310,42 @@ gs.append('rect')
 ```
 
 (写法有点啰嗦啊...)
+
+### 第十一章 — 交互式操作
+
+和 HTML DOM 处理交互事件一样的方法，使用 `on(eventType, handler)`。事件类型也和 DOM 一样：click, dbclick, mouseover, mouseout, mousemove, mousedown, mouseup ...
+
+为柱状图添加鼠标滑过的事件处理：
+
+```js
+gs.append('rect')
+  .attr('x', function(d, i) {
+    return xScale(i) + rectPadding / 2
+  })
+  .attr('y', function(d, i) {
+    return yScale(d)
+  })
+  .attr('width', function(d, i) {
+    return xScale.step() - rectPadding
+  })
+  .attr('height', function(d, i) {
+    return height - margin.top - margin.bottom - yScale(d)
+  })
+  .attr('fill', 'blue')
+  .on('mouseover', function() {
+    d3.select(this)
+      .transition()
+      .duration(1000)
+      .attr('fill', 'yellow')
+  })
+  .on('mouseout', function() {
+    d3.select(this)
+      .transition()
+      .duration(1000)
+      .delay(1000)
+      .attr('fill', 'blue')
+  })
+```
+
+当鼠标滑过当前 rect 时，将填充颜色过渡为 yellow，滑出后再过渡回 blue。
+
