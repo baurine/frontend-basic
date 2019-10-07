@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>D3 Example</title>
+    <script src="http://d3js.org/d3.v5.min.js"></script>
+  </head>
+  <body>
+    <p>dog</p>
+    <p>cat</p>
+    <p>pig</p>
+
+    <script>
+      var str = 'is an animal'
+      var p = d3.select('body').selectAll('p')
+      p.datum(str).text(function(d, i) {
+        return `第 ${i} 个元素 ${d}`
+      })
+    </script>
+  </body>
+</html>
