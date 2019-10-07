@@ -254,3 +254,59 @@ g.append('g')
   .attr('transform', `translate(0, ${height - margin.top - margin.bottom})`)
   .call(xAxis)
 ```
+
+### 第十章 — 让图表动起来
+
+给 SVG 添加动画。动画的套路都是这样：
+
+1. 设置初始状态及结束状态
+1. 设置动画持续时间 (duration) 及开始时间 (delay)
+1. 设置时间变换曲线 (ease)
+1. 设置重复次数或者是否反转
+
+D3 中相关的 API:
+
+- `.attr(xxx).transition().attr(yyy)` - 使用 transition() 添加过渡动画，从 xxx 状态过渡到 yyy
+- `.duration(2000)` - 动画持续时间
+- `.delay(500)` - 动画开始时间，这里表示延迟 0.5s 后开始
+- `.ease(d3.easeElasticInOut)` - 过渡方式，即时间变换曲线
+
+给第九章中的柱状矩形添加动画，示例代码如下，对 y 和 height 属性进行了过渡动画：
+
+```js
+// bar
+var rectPadding = 20
+gs.append('rect')
+  .attr('x', function(d, i) {
+    return xScale(i) + rectPadding / 2
+  })
+  .attr('y', function(d, i) {
+    // 初始状态
+    var min = yScale.domain()[0]
+    return yScale(min)
+  })
+  .attr('width', function(d, i) {
+    return xScale.step() - rectPadding
+  })
+  .attr('height', function(d, i) {
+    // 初始状态
+    return 0
+  })
+  .attr('fill', 'blue')
+  .transition()
+  .duration(2000)
+  .delay(function(d, i) {
+    return i * 400
+  })
+  // .ease(d3.easeElasticInOut)
+  .attr('y', function(d, i) {
+    // 回到最终状态
+    return yScale(d)
+  })
+  .attr('height', function(d, i) {
+    // 回到最终状态
+    return height - margin.top - margin.bottom - yScale(d)
+  })
+```
+
+(写法有点啰嗦啊...)

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>D3 Example</title>
+    <script src="http://d3js.org/d3.v5.min.js"></script>
+  </head>
+  <body>
+    <svg width="960" height="600"></svg>
+    <script>
+      var margin = { top: 60, right: 60, bottom: 60, left: 60 }
+      var svg = d3.select('svg')
+      var width = svg.attr('width')
+      var height = svg.attr('height')
+      var g = svg
+        .append('g')
+        .attr('transform', `translate(${margin.top}, ${margin.left})`)
+
+      var dataset = [10, 20, 30, 23, 13, 40, 27, 35, 20]
+
+      var xScale = d3
+        .scaleBand()
+        .domain(d3.range(dataset.length))
+        .rangeRound([0, width - margin.left - margin.right])
+      var xAxis = d3.axisBottom(xScale)
+
+      var yScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(dataset)])
+        .range([height - margin.top - margin.bottom, 0])
+      var yAxis = d3.axisLeft(yScale)
+
+      // x 轴
+      g.append('g')
+        .attr(
+          'transform',
+          `translate(0, ${height - margin.top - margin.bottom})`
+        )
+        .call(xAxis)
+      // y 轴
+      g.append('g')
+        .attr('transform', 'translate(0,0)')
+        .call(yAxis)
+
+      var gs = g
+        .selectAll('.rect')
+        .data(dataset)
+        .enter()
+        .append('g')
+
+      // bar
+      var rectPadding = 20
+      gs.append('rect')
+        .attr('x', function(d, i) {
+          return xScale(i) + rectPadding / 2
+        })
+        .attr('y', function(d, i) {
+          // return yScale(d)
+          // 初始状态
+          var min = yScale.domain()[0]
+          return yScale(min)
+        })
+        .attr('width', function(d, i) {
+          return xScale.step() - rectPadding
+        })
+        .attr('height', function(d, i) {
+          // return height - margin.top - margin.bottom - yScale(d)
+          // 初始状态
+          return 0
+        })
+        .attr('fill', 'blue')
+        .transition()
+        .duration(2000)
+        .delay(function(d, i) {
+          return i * 400
+        })
+        // .ease(d3.easeElasticInOut)
+        .attr('y', function(d, i) {
+          // 回到最终状态
+          return yScale(d)
+        })
+        .attr('height', function(d, i) {
+          // 回到最终状态
+          return height - margin.top - margin.bottom - yScale(d)
+        })
+
+      // text
+      gs.append('text')
+        .attr('x', function(d, i) {
+          return xScale(i)
+        })
+        .attr('y', function(d, i) {
+          // return yScale(d) + 5
+          // 初始状态
+          var min = yScale.domain()[0]
+          return yScale(min)
+        })
+        .attr('dx', function(d, i) {
+          return (xScale.step() - rectPadding) / 2
+        })
+        .attr('dy', 20)
+        .attr('fill', 'white')
+        .text(function(d, i) {
+          return d
+        })
+        .transition()
+        .duration(2000)
+        .delay(function(d, i) {
+          return i * 400
+        })
+        // .ease(d3.easeElasticInOut)
+        .attr('y', function(d, i) {
+          // 回到最终状态
+          return yScale(d) + 5
+        })
+    </script>
+  </body>
+</html>
