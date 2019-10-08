@@ -4,6 +4,24 @@ D3.js，类似 SVG 中的 jQuery，同样拥有强大的选择器，链式调用
 
 突然觉得 D3.js 的哲学思想和 Matlab 也有点相似啊，不需要使用循环而可以方便的批量操作数据和 SVG 元素。(jQuery 也有部分方法可以这样)
 
+参考：
+
+- [D3.js v5 版本入门教程](https://blog.csdn.net/qq_34414916/article/category/7608878)
+- [D3.js v3 版本入门教程](http://wiki.jikexueyuan.com/project/d3wiki/)
+- [Learn D3.js step by step](https://www.d3indepth.com/) - awesome!
+- [D3.js 简介](https://github.com/ssthouse/ssthouse-blog/blob/master/d3-guide/d3_roadmap_cn.md)
+- [D3.js 中文网站](https://d3js.org.cn/)
+
+一些示例图的参考：
+
+- [D3.js Tutorial: Building Interactive Bar Charts with JavaScript](https://blog.risingstack.com/d3-js-tutorial-bar-charts-with-javascript/)
+- [D3.js 上手 - 饼状图](https://greenmzc.github.io/2016/11/07/D3-js%E4%B8%8A%E6%89%8B%E2%80%94%E2%80%94%E9%A5%BC%E7%8A%B6%E5%9B%BE/)
+- [通过 D3.js 绘制一份中国分省地图](https://marshal.ohtly.com/2018/09/03/Drow-an-China-Map-With-D3-js/)
+- [使用 d3 绘制中国地图](http://blog.tcs-y.com/2018/12/12/d3-china-map/)
+- [D3.js 上手 - 折线图](https://greenmzc.github.io/2016/10/18/D3-js%E4%B8%8A%E6%89%8B%E2%80%94%E2%80%94%E6%8A%98%E7%BA%BF%E5%9B%BE/)
+- [用 d3.js 实现基于 SVG 的线形图](http://www.alloyteam.com/2013/12/d3-line-chart/)
+- [D3 examples search engine](https://blockbuilder.org/search)
+
 ## D3.js 入门教程
 
 - [D3.js v5 版本入门教程](https://blog.csdn.net/qq_34414916/article/category/7608878)
@@ -529,11 +547,11 @@ d3.json('data/china.geojson').then(geojson => {
 })
 ```
 
-## misc
+## Misc
 
 ### 绘制折线图
 
-- [D3.js 上手——折线图](https://greenmzc.github.io/2016/10/18/D3-js%E4%B8%8A%E6%89%8B%E2%80%94%E2%80%94%E6%8A%98%E7%BA%BF%E5%9B%BE/)
+- [D3.js 上手 - 折线图](https://greenmzc.github.io/2016/10/18/D3-js%E4%B8%8A%E6%89%8B%E2%80%94%E2%80%94%E6%8A%98%E7%BA%BF%E5%9B%BE/)
 - [用 d3.js 实现基于 SVG 的线形图](http://www.alloyteam.com/2013/12/d3-line-chart/)
 
 实现代码见 misc-1-line-chart.html。
@@ -541,3 +559,9 @@ d3.json('data/china.geojson').then(geojson => {
 上面的教程都是基于 D3 v3 版本的，v5 版本中，让折线平滑的方法是 `curve(d3.curveCardinal)`。
 
 另外在绘制折线和 dot 时，要先把坐标原点设置在 `(padding.left, padding.top)`。
+
+### 简单热力图
+
+像 GitHub contribution 那种简单的热力图，而不是用 heatmap.js 绘制的复杂热力图。
+
+- [Heatmap with data update](https://blockbuilder.org/zhouliwang/7864f974a34ec9230835163721d8c158)
