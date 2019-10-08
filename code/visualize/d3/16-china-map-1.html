@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>D3 Example</title>
+    <script src="http://d3js.org/d3.v5.min.js"></script>
+  </head>
+  <body>
+    <svg width="960" height="600"></svg>
+    <script>
+      var margin = { top: 60, right: 60, bottom: 60, left: 60 }
+      var svg = d3.select('svg')
+      var width = svg.attr('width')
+      var height = svg.attr('height')
+      var g = svg
+        .append('g')
+        .attr('transform', `translate(${margin.top}, ${margin.left})`)
+
+      // 数据转换器
+      // 投影函数，将经纬度转换成二维数据
+      var projection = d3
+        .geoMercator()
+        .center([104, 38])
+        .scale(500)
+        .translate([width / 2, height / 2])
+      // 地理路径生成器
+      var path = d3.geoPath().projection(projection)
+
+      // 加载 json，绘制 path
+      d3.json('data/china.geojson').then(geojson => {
+        // 所有省用统一颜色绘制
+        g.append('path')
+          .attr('d', path(geojson))
+          .attr('fill', 'Lavender')
+          .attr('stroke', 'DarkGrey')
+          .attr('stroke-width', 1)
+      })
+    </script>
+  </body>
+</html>

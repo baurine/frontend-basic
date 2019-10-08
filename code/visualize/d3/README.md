@@ -2,9 +2,10 @@
 
 D3.js，类似 SVG 中的 jQuery，同样拥有强大的选择器，链式调用。(D3.js 也可用于普通的 HTML DOM)
 
-## D3.js 的 v5 版本入门教程
+## D3.js 入门教程
 
-- [D3.js 的 v5 版本入门教程](https://blog.csdn.net/qq_34414916/article/category/7608878)
+- [D3.js v5 版本入门教程](https://blog.csdn.net/qq_34414916/article/category/7608878)
+- [D3.js v3 版本入门教程](http://wiki.jikexueyuan.com/project/d3wiki/)
 
 目录：
 
@@ -391,3 +392,65 @@ D3 提供了一些制作常见图形的函数。D3 中一些常见的图形：
 先跳过，需要时再消化。需要了解许多新的 API。
 
 ### 第十六章 — 中国地图
+
+- [通过 D3.js 绘制一份中国分省地图](https://marshal.ohtly.com/2018/09/03/Drow-an-China-Map-With-D3-js/)
+- [使用 d3 绘制中国地图](http://blog.tcs-y.com/2018/12/12/d3-china-map/)
+
+绘制地图需要特别的描述地理坐标的 JSON 文件，称为 GeoJSON。
+
+主要原理其实简单，加载 json 文件中的数据，然后使用 d3 中的数据转换 api 进行转换，然后使用 path 进行绘制和填充即可。关键在于数据的转换这一步，也可以说是 d3 绘制所有图形中最关键的一步。
+
+首先看数据转换部分的逻辑，由于 geojson 中的数据是经纬度，是三维的，需要转换成网页上显示的二维数据，所以需要设置一个投影函数来转换经纬度，使用常用的墨卡托投影函数 - `d3.geoMercator()`。
+
+```js
+// 数据转换器
+// 投影函数，将经纬度转换成二维数据
+var projection = d3
+  .geoMercator()
+  .center([104, 38]) // 设置地图中心位置，[104, 38] 表示经纬度
+  .scale(500) // 放大比例
+  .translate([width / 2, height / 2])
+// 地理路径生成器
+var path = d3.geoPath().projection(projection)
+```
+
+如果所有省用统一颜色绘制：
+
+```js
+// 加载 json，绘制 path
+d3.json('data/china.geojson').then(geojson => {
+  // 所有省用统一颜色绘制
+  g.append('path')
+    .attr('d', path(geojson))
+    .attr('fill', 'Lavender')
+    .attr('stroke', 'DarkGrey')
+    .attr('stroke-width', 1)
+})
+```
+
+如果每个省用不同的颜色绘制，那么每个省用一个 path 绘制，每个省填充不同的颜色：
+
+```js
+// 加载 json，绘制 path
+d3.json('data/china.geojson').then(geojson => {
+  // 分省绘制，每个省用不同颜色
+  g.selectAll('path')
+    .data(geojson.features)
+    .enter()
+    .append('path')
+    .attr('d', function(d, i) {
+      return path(d)
+    })
+    .attr('stroke', 'DarkGrey')
+    .attr('stroke-width', 1)
+    .attr('fill', function(d, i) {
+      return colorScale(i)
+    })
+    .on('mouseover', function(d, i) {
+      d3.select(this).attr('fill', 'yellow')
+    })
+    .on('mouseout', function(d, i) {
+      d3.select(this).attr('fill', colorScale(i))
+    })
+})
+```
