@@ -2,6 +2,8 @@
 
 D3.js，类似 SVG 中的 jQuery，同样拥有强大的选择器，链式调用。(D3.js 也可用于普通的 HTML DOM)
 
+突然觉得 D3.js 的哲学思想和 Matlab 也有点相似啊，不需要使用循环而可以方便的批量操作数据和 SVG 元素。(jQuery 也有部分方法可以这样)
+
 ## D3.js 入门教程
 
 - [D3.js v5 版本入门教程](https://blog.csdn.net/qq_34414916/article/category/7608878)
@@ -384,6 +386,8 @@ gs.append('rect')
 
 ### 第十三章 — 饼状图
 
+- [D3.js 上手 - 饼状图](https://greenmzc.github.io/2016/11/07/D3-js%E4%B8%8A%E6%89%8B%E2%80%94%E2%80%94%E9%A5%BC%E7%8A%B6%E5%9B%BE/)
+
 将类似 `var dataset = [ 30 , 10 , 43 , 55 , 13 ];` 绘制成饼图，直接拿这样的数据是不能绘制的，因为缺少绘制弧形所需的角度等数值，所以我们需要用到布局将其转换成适合绘制弧形的数据。
 
 转换：
@@ -524,3 +528,16 @@ d3.json('data/china.geojson').then(geojson => {
     })
 })
 ```
+
+## misc
+
+### 绘制折线图
+
+- [D3.js 上手——折线图](https://greenmzc.github.io/2016/10/18/D3-js%E4%B8%8A%E6%89%8B%E2%80%94%E2%80%94%E6%8A%98%E7%BA%BF%E5%9B%BE/)
+- [用 d3.js 实现基于 SVG 的线形图](http://www.alloyteam.com/2013/12/d3-line-chart/)
+
+实现代码见 misc-1-line-chart.html。
+
+上面的教程都是基于 D3 v3 版本的，v5 版本中，让折线平滑的方法是 `curve(d3.curveCardinal)`。
+
+另外在绘制折线和 dot 时，要先把坐标原点设置在 `(padding.left, padding.top)`。
