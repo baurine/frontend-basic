@@ -30,3 +30,9 @@ WebGL 是用来在实现 3D 绘图的，比较复杂，需要一些专业的知�
 其它资源：
 
 - [AntV 文档](https://www.yuque.com/antv)
+  - G2 - 用于绘制日常最常见的各种统计图表，比如柱状图，折线图，饼图等，基于 G2 封装有 BizCharts 库，viser 库
+  - G6 - 专注于绘制各种拓扑图，比如流程图，思维导图
+  - F2 - 用于移动端，可以看作是 G2 的 mobile 版
+  - L7 - 专注于绘制各种地理空间图表，比如中国地图，地球，一般会用来显示基本地理空间的热力图
+- [AntV、G2 和 BizCharts 介绍](https://github.com/AnHongpeng/blog/issues/4)
+- [三大图表库：ECharts、BizCharts 和 G2，该如何选择？](https://juejin.im/post/5ba348475188255c70399e1a)
