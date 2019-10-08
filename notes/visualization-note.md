@@ -21,15 +21,11 @@ canvas 取代 flash 成为 H5 小游戏的解决方案，比如 cocos2d，白鹭
 
 WebGL 是用来在实现 3D 绘图的，比较复杂，需要一些专业的知识，常用的库是 Three.js。
 
-以上只作大致了解，有空或有需求的时候主要把 D3.js 学习一下。
-
-- [D3.js 入门教程](http://wiki.jikexueyuan.com/project/d3wiki/)
-- [D3.js 的 v5 版本入门教程](https://blog.csdn.net/qq_34414916/article/category/7608878)
-
 分类笔记：
 
 - [Canvas 及动画](../code/visualize/canvas-and-animation/README.md)
 - [SVG 及动画](../code/visualize/svg-and-animation/README.md)
+- [D3.js 学习笔记](../code/visualize/d3/README.md)
 
 其它资源：
 

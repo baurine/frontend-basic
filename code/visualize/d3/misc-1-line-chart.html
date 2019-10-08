@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>D3 Example</title>
+    <script src="http://d3js.org/d3.v5.min.js"></script>
+  </head>
+  <body>
+    <svg></svg>
+    <script>
+      // 数据
+      var dataset = [
+        [1, 224],
+        [2, 528],
+        [3, 756],
+        [4, 632],
+        [5, 582],
+        [6, 704],
+        [7, 766],
+        [8, 804],
+        [9, 884],
+        [10, 960],
+        [11, 1095],
+        [12, 1250]
+      ]
+      var min = d3.min(dataset, d => d[1])
+      var max = d3.max(dataset, d => d[1])
+
+      // svg 尺寸
+      var width = 600,
+        height = 600
+      var padding = { top: 50, right: 50, bottom: 50, left: 50 }
+      var svg = d3
+        .select('svg')
+        .attr('width', width + 'px')
+        .attr('height', height + 'px')
+
+      // 比例尺
+      var xScale = d3
+        .scaleLinear()
+        .domain([1, 12])
+        .range([0, width - padding.left - padding.right])
+      var yScale = d3
+        .scaleLinear()
+        .domain([0, max])
+        .range([height - padding.top - padding.bottom, 0])
+
+      // 坐标轴
+      var xAxis = d3.axisBottom().scale(xScale)
+      var yAxis = d3.axisLeft().scale(yScale)
+      svg
+        .append('g')
+        .attr('class', 'axis')
+        .attr(
+          'transform',
+          `translate(${padding.left}, ${height - padding.bottom})`
+        )
+        .call(xAxis)
+      svg
+        .append('g')
+        .attr('class', 'axis')
+        .attr('transform', `translate(${padding.left},${padding.top})`)
+        .call(yAxis)
+
+      // line path 生成器
+      var linePathGenerator = d3
+        .line()
+        .x(d => xScale(d[0]))
+        .y(d => yScale(d[1]))
+        .curve(d3.curveCardinal)
+
+      // 绘制折线
+      svg
+        .append('g')
+        .append('path')
+        .attr('class', 'line-path')
+        .attr('transform', `translate(${padding.left}, ${padding.top})`)
+        .attr('d', linePathGenerator(dataset))
+        .attr('fill', 'none')
+        .attr('stroke', 'green')
+        .attr('stroke-width', 3)
+
+      // 绘制 dot
+      svg
+        .append('g')
+        .selectAll('circle')
+        .data(dataset)
+        .enter()
+        .append('circle')
+        .attr('transform', `translate(${padding.left}, ${padding.top})`)
+        .attr('cx', linePathGenerator.x())
+        .attr('cy', linePathGenerator.y())
+        .attr('r', 5)
+        .attr('fill', 'red')
+    </script>
+  </body>
+</html>

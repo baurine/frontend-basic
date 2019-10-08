@@ -44,6 +44,9 @@ web 上实现 ui 是声明式的，html 和 css 都是声明式的。而 android
   * [Bootstrap3 - 2](notes/bootstrap3-2.md)
   * [Bootstrap4](notes/bootstrap4.md)
   * [Bulma](notes/bulma.md)
+* 其它
+  * [数据可视化](notes/visualization-note.md)
+  * [动画](notes/animation-note.md)
 
 相关的其它项目：
 

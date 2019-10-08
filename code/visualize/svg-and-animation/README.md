@@ -4,6 +4,7 @@
 
 - [SVG 图像入门教程](https://www.ruanyifeng.com/blog/2018/08/svg.html)
 - [菜鸟教程之 SVG 教程](http://www.runoob.com/svg/svg-tutorial.html)
+- [SVG 教程的翻译版](https://github.com/brucewar/svg-tutorial)
 
 主要就是学习各种形状标签的用法。
 

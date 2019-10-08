@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>D3 Example</title>
+    <script src="http://d3js.org/d3.v5.min.js"></script>
+  </head>
+  <body>
+    <script>
+      // scaleLinear
+      var dataset = [1.2, 2.3, 0.9, 1.5, 3.3]
+      var min = d3.min(dataset)
+      var max = d3.max(dataset)
+      var scaleLinear = d3
+        .scaleLinear()
+        .domain([min, max])
+        .range([0, 300])
+      document.write('scaleLinear(0.9): ', scaleLinear(0.9)) // output: 0
+      d3.select('body').append('br')
+      document.write('scaleLinear(1): ', scaleLinear(1))
+      d3.select('body').append('br')
+      document.write('scaleLinear(2): ', scaleLinear(2)) // output: 137.5
+      d3.select('body').append('br')
+      document.write('scaleLinear(3.3): ', scaleLinear(3.3)) // output: 300
+      d3.select('body').append('br')
+
+      // scaleOrdinal
+      var index = [0, 1, 2, 3, 4]
+      var color = ['red', 'blue', 'yellow', 'black', 'green']
+      var scaleOrdinal = d3
+        .scaleOrdinal()
+        .domain(index)
+        .range(color)
+      document.write('scaleOrdinal(1) 输出：' + scaleOrdinal(1))
+      d3.select('body').append('br') //换行
+      document.write('scaleOrdinal(2) 输出：' + scaleOrdinal(2))
+      d3.select('body').append('br')
+      document.write('scaleOrdinal(4) 输出：' + scaleOrdinal(4))
+    </script>
+  </body>
+</html>

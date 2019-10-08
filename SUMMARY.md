@@ -27,3 +27,6 @@
   * [Bootstrap3 - 2](notes/bootstrap3-2.md)
   * [Bootstrap4](notes/bootstrap4.md)
   * [Bulma](notes/bulma.md)
+* 其它
+  * [数据可视化](notes/visualization-note.md)
+  * [动画](notes/animation-note.md)

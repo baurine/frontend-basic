@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>D3 Example</title>
+    <script src="http://d3js.org/d3.v5.min.js"></script>
+  </head>
+  <body>
+    <p>dog</p>
+    <p class="myP2">cat</p>
+    <p id="myP3">pig</p>
+    <p>rat</p>
+
+    <script>
+      var p = d3.select('body').selectAll('.myP2')
+      p.style('color', 'red')
+
+      d3.select('body')
+        .append('p')
+        .text('another animal')
+        .style('color', 'blue')
+      d3.select('body')
+        .insert('p', '#myP3')
+        .text('insert an animal')
+        .style('color', 'cyan')
+      d3.select('body')
+        .select('#myP3')
+        .remove()
+    </script>
+  </body>
+</html>
