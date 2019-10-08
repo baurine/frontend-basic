@@ -7,6 +7,8 @@ D3.js，类似 SVG 中的 jQuery，同样拥有强大的选择器，链式调用
 - [D3.js v5 版本入门教程](https://blog.csdn.net/qq_34414916/article/category/7608878)
 - [D3.js v3 版本入门教程](http://wiki.jikexueyuan.com/project/d3wiki/)
 
+(这两个教程要结合着看，前者用了 v5 的 API，但写得太简单，后者用了过时的 v3 API，但解释得很清晰。)
+
 目录：
 
 - 第一章 — 如何在项目中使用 D3.js
@@ -20,7 +22,7 @@ D3.js，类似 SVG 中的 jQuery，同样拥有强大的选择器，链式调用
 - 第九章 — 完整的柱状图
 - 第十章 — 让图表动起来
 - 第十一章 — 交互式操作
-- 第十二章 — D3.js 中各种精美的图形
+- 第十二章 — 布局
 - 第十三章 — 饼状图
 - 第十四章 — 力导向图
 - 第十五章 — 树状图
@@ -182,10 +184,18 @@ update 和 exit 示例代码：
 
 ### 第七章 — 比例尺的使用
 
-两种比例尺：
+比例尺 (scale)：将某一区域的值映射到另一区域，其大小关系不变。
+
+对于一个一元二次函数，有 x 和 y 两个未知数，当 x 的值确定时，y 的值也就确定了。
+
+在数学中，x 的范围被称为定义域，y 的范围被称为值域。
+
+D3 中的比例尺，也有定义域和值域，分别被称为 domain 和 range。开发者需要指定 domain 和 range 的范围，如此即可得到一个计算关系。
+
+D3 中两种常用的比例尺：
 
 - 线性比例尺 - d3.scaleLinear()，按比例
-- 序数比例尺 - d3.scaleOrdinal()，一一对应，有点枚举的意思
+- 序数比例尺 - d3.scaleOrdinal()，一一对应，有点枚举的意思，用于 domain 和 range 为离散值，即非连续值
 
 使用示例：
 
@@ -217,6 +227,8 @@ D3 中没有现成的坐标轴图形，需要我们自己用其他组件拼凑�
 
 关键函数：call()。首先利用 D3 提供的坐标轴函数构造出一个坐标轴，然后选择 SVG DOM 元素，在 DOM 元素上调用 call(axis)。
 
+用 call() 是为了维持链式调用，实际 `selection.call(axis)` 等于 `axis(selection)`。
+
 在第六章的简单柱状图基础上加上一个 x 轴，示例代码：
 
 ```js
@@ -227,6 +239,8 @@ g.append('g')
   .attr('transform', `translate(20, ${dataset.length * rectHeight})`)
   .call(xAxis)
 ```
+
+上面的代码等价于 `xAxis(g.append('g').attr(...))`。
 
 我发现 SVG 中的这个 `<g>` 标签有点类似 html 中的 `<div>` 标签。
 
@@ -262,7 +276,7 @@ g.append('g')
 
 1. 设置初始状态及结束状态
 1. 设置动画持续时间 (duration) 及开始时间 (delay)
-1. 设置时间变换曲线 (ease)
+1. 设置过渡方式 (ease)
 1. 设置重复次数或者是否反转
 
 D3 中相关的 API:
@@ -270,7 +284,7 @@ D3 中相关的 API:
 - `.attr(xxx).transition().attr(yyy)` - 使用 transition() 添加过渡动画，从 xxx 状态过渡到 yyy
 - `.duration(2000)` - 动画持续时间
 - `.delay(500)` - 动画开始时间，这里表示延迟 0.5s 后开始
-- `.ease(d3.easeElasticInOut)` - 过渡方式，即时间变换曲线
+- `.ease(d3.easeElasticInOut)` - 过渡方式
 
 给第九章中的柱状矩形添加动画，示例代码如下，对 y 和 height 属性进行了过渡动画：
 
@@ -350,31 +364,87 @@ gs.append('rect')
 
 当鼠标滑过当前 rect 时，将填充颜色过渡为 yellow，滑出后再过渡回 blue。
 
-### 第十二章 — D3.js 中各种精美的图形
+### 第十二章 — 布局
 
-D3 提供了一些制作常见图形的函数。D3 中一些常见的图形：
+布局，可以理解成 “制作常见图形的函数”，有了它制作各种相对复杂的图表就方便多了。
 
-- bubble chart
-- packing chart
-- bundling chart
-- force chart
-- chord chart
-- pie chart
-- tree chart
-- map chart
+(布局这个名字取得真不咋的...其实是用来进行数据转换的函数)
+
+![](./d3-layout.png)
+
+如何理解布局：将不适合用于绘图的数据转换成了适合用于绘图的数据。本教程将布局的作用解释成：数据转换。
+
+> 布局不是要直接绘图，而是为了得到绘图所需的数据。
+
+> D3 总共提供了 12 个布局：饼状图（Pie）、力导向图（Force）、弦图（Chord）、树状图（Tree）、集群图（Cluster）、捆图（Bundle）、打包图（Pack）、直方图（Histogram）、分区图（Partition）、堆栈图（Stack）、矩阵树图（Treemap）、层级图（Hierarchy）。
+
+> 12 个布局中，层级图（Hierarchy）不能直接使用。集群图、打包图、分区图、树状图、矩阵树图是由层级图扩展来的。如此一来，能够使用的布局是 11 个（有 5 个是由层级图扩展而来）。这些布局的作用都是将某种数据转换成另一种数据，而转换后的数据是利于可视化的。
+
+(那有第三方布局吗？应该要有的吧，不然怎么扩展...其实布局就是一些数据转换函数而已，没有的话就自己实现喽)
 
 ### 第十三章 — 饼状图
 
-绘制饼状图所需 API：
+将类似 `var dataset = [ 30 , 10 , 43 , 55 , 13 ];` 绘制成饼图，直接拿这样的数据是不能绘制的，因为缺少绘制弧形所需的角度等数值，所以我们需要用到布局将其转换成适合绘制弧形的数据。
 
-- d3.arc().innerRadius(radius).outerRadiu(radius) - 弧形生成器
+转换：
+
+```js
+// 定义布局
+var pie = d3.pie()
+// 转换
+var pieData = pie(dataset)
+console.log(pieData)
+// 将 pieData 和选择集进行绑定
+var gs = g
+  .selectAll('.g')
+  .data(pieData)
+  .enter()
+  .append('g')
+  .attr('transform', `translate(${width / 2},${height / 2})`)
+```
+
+通过转换得到的 pieData 中就有了角度等信息，可以用来绘制弧形了：
+
+```
+Array(5)
+  0:
+    data: 30
+    endAngle: 5.3261438365495835
+    index: 2
+    padAngle: 0
+    startAngle: 4.077828874858275
+    value: 30
+```
+
+为了将 pieData 中的数据生成对应的弧形，即得到 path 元素中的 d 属性值，还需要借助弧形生成器函数。
+
+```js
+// 新建一个弧形生成器
+var arcGenerator = d3
+  .arc()
+  .innerRadius(0)
+  .outerRadius(100)
+// ...
+// 绘制扇形
+gs.append('path')
+  .attr('d', function(d, i) {
+    return arcGenerator(d)
+  })
+  .attr('fill', function(d, i) {
+    return colorScale(i)
+  })
+```
+
+总结绘制饼状图所需 API：
+
 - d3.pie(dataset) - 将原始数组生成绘制饼状图所需数组，用于和 SVG 元素进行绑定
+- d3.arc().innerRadius(radius).outerRadiu(radius) - 弧形生成器
 - d3.arc().centroid() - 弧形中心位置，用来绘制文本时所需坐标的方法
 - d3.schemeCategory10 - 颜色
 
-具体代码见示例。
-
 ### 第十四章 — 力导向图
+
+(看了 v3 版的教程好理解多了，先暂时跳过，需要时再看)
 
 绘制力导向图所需的 API：
 
