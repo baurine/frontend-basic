@@ -220,4 +220,30 @@ function draw(data) {
       d3.select(this).classed('disabled', !isEnabled)
     })
   }
+
+  ///////////////////////////////////
+  // step 3 - 2: add extra options
+  const extraOptionsContainer = legendContainer
+    .append('div')
+    .attr('class', 'extra-options-container')
+  extraOptionsContainer
+    .append('div')
+    .attr('class', 'hide-all-option')
+    .text('hide all')
+    .on('click', function() {
+      regionIds.forEach(regionId => {
+        regions[regionId].enabled = false
+      })
+      reDrawChart()
+    })
+  extraOptionsContainer
+    .append('div')
+    .attr('class', 'show-all-option')
+    .text('show all')
+    .on('click', function() {
+      regionIds.forEach(regionId => {
+        regions[regionId].enabled = true
+      })
+      reDrawChart()
+    })
 }

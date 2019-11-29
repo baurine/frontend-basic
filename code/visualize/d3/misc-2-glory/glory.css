@@ -36,3 +36,20 @@ body {
 .legend-item:hover {
   text-decoration: underline;
 }
+
+.extra-options-container {
+  display: flex;
+  margin-top: 5px;
+  width: 110px;
+  justify-content: space-between;
+}
+.hide-all-option,
+.show-all-option {
+  cursor: pointer;
+  font-size: 12px;
+  text-decoration: underline;
+}
+.hide-all-option:hover,
+.show-all-option:hover {
+  text-decoration: none;
+}
