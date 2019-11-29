@@ -19,22 +19,16 @@ function draw(data) {
   // ]
   // console.log(data)
 
-  // 准备尺寸和 scale
+  // 准备尺寸
   const outWidth = 750
   const outHeight = 420
   const margin = { top: 20, right: 20, bottom: 50, left: 50 }
   const inWidth = outWidth - margin.left - margin.right
   const inHeight = outHeight - margin.top - margin.bottom
+
+  // 准备 scale
   const x = d3.scaleTime().range([0, inWidth])
   const y = d3.scaleLinear().range([inHeight, 0])
-  const svg = d3
-    .select('.chart')
-    .append('svg')
-    .attr('width', outWidth)
-    .attr('height', outHeight)
-    .append('g')
-    .attr('transform', `translate(${margin.left}, ${margin.top})`) // 移动到绘图区的起点
-
   // color scale
   const colorScale = d3
     .scaleOrdinal()
@@ -68,50 +62,59 @@ function draw(data) {
   y.domain([0, d3.max(data, d => d.percent)])
   colorScale.domain(d3.map(data, d => d.regionId).keys())
 
-  // 绘制坐标轴
-  // 坐标轴由 path/line/text 三种 svg 元素组成
-  // path 是轴，line 是与轴垂直的 tick，text 是标签
-  // axisBottom 表示默认文字在 path 之下，并不表示是底部的 x 轴
-  // axisRight 表示默认文字在 path 右边，并不表示是右边的 y 轴
-  // axisTop 表示默认文字在 path 上边
-  // axisLeft 表示默认文辽在 path 左边
-  console.log(((inWidth + 2) / (inHeight + 2)) * 5)
-  const xAxis = d3
-    .axisBottom(x)
-    .ticks(((inWidth + 2) / (inHeight + 2)) * 5) // 这个算出是约为 10，但实际绘出来为什么有 14 个点啊 (http://pkuwwt.github.io/d3-tutorial-cn/axes.html，这篇文章说 ticks() 只是建议，d3 会根据实际情况自行调整)
-    .tickSize(-inHeight - 6) // 还可以负数？猜测这个 tickSize 表示 tick 的长度，负值表示往 y 轴上方扩展，形成网格
-    .tickPadding(10) // 从源码看，padding 是坐标轴上文字和 path 的距离
-  const yAxis = d3
-    .axisRight(y) // 为什么是 right 而不是 left，因为 right 并不表示右边的 y 轴，只表示文字默认在右边
-    .ticks(5)
-    .tickSize(7 + inWidth) // 往 x 轴方向扩展的长度
-    .tickPadding(-15 - inWidth) // 文字和竖线的距离，实际 padding: 7 + inWidth -15 - inWidth = -8，源码：spacing = Math.max(tickSizeInner, 0) + tickPadding,
-    .tickFormat(d => d + '%')
-  // 是否等同，测试了，效果基本一样，甚至还要好一些，文字对齐的更好
-  // const yAxis = d3
-  //   .axisLeft(y)
-  //   .ticks(5)
-  //   .tickSize(-7 - inWidth)
-  //   .tickPadding(8)
-  //   .tickFormat(d => d + '%')
+  // svg
+  const svg = d3
+    .select('.chart')
+    .append('svg')
+    .attr('width', outWidth)
+    .attr('height', outHeight)
+    .append('g')
+    .attr('transform', `translate(${margin.left}, ${margin.top})`) // 移动到绘图区的起点
 
-  svg
-    .append('g')
-    .attr('class', 'axis x-axis')
-    .attr('transform', `translate(0, ${inHeight + 6})`)
-    .call(xAxis)
-  svg
-    .append('g')
-    .attr('class', 'axis y-axis')
-    .attr('transform', 'translate(-7, 0)')
-    .call(yAxis)
-
-  // 单独绘制两条轴的 path，上面两条轴的 path 在 style 中用 `display: none` 隐藏了
-  svg
-    .append('g')
-    .attr('transform', `translate(0, ${inHeight})`)
-    .call(d3.axisBottom(x).ticks(0))
-  svg.append('g').call(d3.axisLeft(y).ticks(0))
+  // Step 1 - 绘制坐标轴和网格
+  function drawAxes() {
+    // 坐标轴由 path/line/text 三种 svg 元素组成
+    // path 是轴，line 是与轴垂直的 tick，text 是标签
+    // axisBottom 表示默认文字在 path 之下，并不表示是底部的 x 轴
+    // axisRight 表示默认文字在 path 右边，并不表示是右边的 y 轴
+    // axisTop 表示默认文字在 path 上边
+    // axisLeft 表示默认文字在 path 左边
+    const xAxis = d3
+      .axisBottom(x)
+      .ticks(((inWidth + 2) / (inHeight + 2)) * 5) // 这个算出是约为 10，但实际绘出来为什么有 14 个点啊 (http://pkuwwt.github.io/d3-tutorial-cn/axes.html，这篇文章说 ticks() 只是建议，d3 会根据实际情况自行调整)
+      .tickSize(-inHeight - 6) // 还可以负数？猜测这个 tickSize 表示 tick 的长度，负值表示往 y 轴上方扩展，形成网格
+      .tickPadding(10) // 从源码看，padding 是坐标轴上文字和 path 的距离
+    const yAxis = d3
+      .axisRight(y) // 为什么是 right 而不是 left，因为 right 并不表示右边的 y 轴，只表示文字默认在右边
+      .ticks(5)
+      .tickSize(7 + inWidth) // 往 x 轴方向扩展的长度
+      .tickPadding(-15 - inWidth) // 文字和竖线的距离，实际 padding: 7 + inWidth -15 - inWidth = -8，源码：spacing = Math.max(tickSizeInner, 0) + tickPadding,
+      .tickFormat(d => d + '%')
+    // 是否等同，测试了，效果基本一样，甚至还要好一些，文字对齐的更好
+    // const yAxis = d3
+    //   .axisLeft(y)
+    //   .ticks(5)
+    //   .tickSize(-7 - inWidth)
+    //   .tickPadding(8)
+    //   .tickFormat(d => d + '%')
+    svg
+      .append('g')
+      .attr('class', 'axis x-axis')
+      .attr('transform', `translate(0, ${inHeight + 6})`)
+      .call(xAxis)
+    svg
+      .append('g')
+      .attr('class', 'axis y-axis')
+      .attr('transform', 'translate(-7, 0)')
+      .call(yAxis)
+    // 单独绘制两条轴的 path，上面两条轴的 path 在 style 中用 `display: none` 隐藏了
+    svg
+      .append('g')
+      .attr('transform', `translate(0, ${inHeight})`)
+      .call(d3.axisBottom(x).ticks(0))
+    svg.append('g').call(d3.axisLeft(y).ticks(0))
+  }
+  drawAxes()
 
   ////////////////////////////////
   // step 2: draw lines
@@ -136,7 +139,10 @@ function draw(data) {
   // const regionIds = Object.keys(regions)
   const regionIds = nestByRegionId.map(item => item.key)
   nestByRegionId.forEach(item => {
-    regions[item.key] = item.values
+    regions[item.key] = {
+      data: item.values,
+      enabled: true
+    }
   })
 
   // path 生成器
@@ -144,16 +150,20 @@ function draw(data) {
     .line()
     .x(d => x(d.date))
     .y(d => y(d.percent))
-  svg
-    .selectAll('.line')
-    .data(regionIds)
-    .enter()
-    .append('path')
-    .attr('class', 'line')
-    .attr('id', regionId => `region-${regionId}`)
-    .attr('d', regionId => lineGenerator(regions[regionId]))
-    .style('stroke', regionId => colorScale(regionId))
-  // .style('fill', 'none')
+
+  function drawLines(enabledRegionIds) {
+    const paths = svg.selectAll('.line').data(enabledRegionIds)
+    paths.exit().remove()
+    paths
+      .enter()
+      .append('path')
+      .merge(paths) // ??
+      .attr('class', 'line')
+      .attr('id', regionId => `region-${regionId}`)
+      .attr('d', regionId => lineGenerator(regions[regionId].data))
+      .style('stroke', regionId => colorScale(regionId))
+  }
+  drawLines(regionIds)
 
   /////////////////////////////////////
   // step 3: add legend
@@ -161,13 +171,6 @@ function draw(data) {
   nestByRegionId.forEach(item => {
     regionsNamesById[item.key] = item.values[0].regionName
   }) // [{1: 'Ryazan Oblast': 5: 'Vladimir Oblast', ...}]
-  regions = {}
-  nestByRegionId.forEach(item => {
-    regions[item.key] = {
-      data: item.values,
-      enabled: true
-    }
-  })
 
   const legendContainer = d3.select('.legend')
   const legends = legendContainer
@@ -179,7 +182,7 @@ function draw(data) {
     .enter()
     .append('g')
     .attr('class', 'legend-item')
-    .attr('transform', (regionId, idx) => `translate(0, ${idx * 20})`)
+    .attr('transform', (_, idx) => `translate(0, ${idx * 20})`)
     .on('click', clickLegendHandler)
 
   legends
@@ -200,24 +203,17 @@ function draw(data) {
     .style('text-anchor', 'start')
     .style('font-size', 12)
 
-  function clickLegendHandler(regionId, idx) {
+  function clickLegendHandler(regionId, _idx) {
     regions[regionId].enabled = !regions[regionId].enabled
     reDrawChart()
   }
+
   function reDrawChart() {
     const enabledRegionIds = regionIds.filter(
       regionId => regions[regionId].enabled
     )
-    const paths = svg.selectAll('.line').data(enabledRegionIds)
-    paths.exit().remove()
-    paths
-      .enter()
-      .append('path')
-      .merge(paths)
-      .attr('class', 'line')
-      .attr('id', regionId => `region-${regionId}`)
-      .attr('d', regionId => lineGenerator(regions[regionId].data))
-      .style('stroke', regionId => colorScale(regionId))
+
+    drawLines(enabledRegionIds)
 
     legends.each(function(regionId) {
       const isEnabled = enabledRegionIds.indexOf(regionId) >= 0
