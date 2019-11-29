@@ -22,6 +22,11 @@
         /* 降低 tick 的可视度 */
         stroke-opacity: 0.3;
       }
+      .line {
+        fill: none;
+        stroke: steelblue;
+        stroke-width: 1.5px;
+      }
     </style>
   </head>
   <body>
@@ -140,6 +145,48 @@
           .attr('transform', `translate(0, ${inHeight})`)
           .call(d3.axisBottom(x).ticks(0))
         svg.append('g').call(d3.axisLeft(y).ticks(0))
+
+        ////////////////////////////////
+        // step 2
+        // 按 regionId 进行分组，相同 regionId 的元素聚合在一起
+        const nestByRegionId = d3
+          .nest()
+          .key(d => d.regionId)
+          .sortKeys((v1, v2) => (parseInt(v1, 10) > parseInt(v2, 10) ? 1 : -1))
+          .entries(data)
+        // [{key: "1", values: [{regionId: "1", regionName: ..., date: ..., precent: ...}, {regionId: "1", ...} ]}]
+        console.log(nestByRegionId)
+
+        const regions = {}
+        // d3.map(data, d => d.regionId)
+        //   .keys() // 这个方法去重了?
+        //   .forEach(function(d, i) {
+        //     regions[d] = nestByRegionId[i].values // 总觉得这逻辑不对啊
+        //   })
+        // console.log(d3.map(data, d => d.regionId)) // 结果有点意外
+        // console.log(d3.map(data, d => d.regionId).keys()) // ["1", "5", "9" ...]
+        // console.log(regions) // {1: [...], 5: [...]}
+        // const regionIds = Object.keys(regions)
+        const regionIds = nestByRegionId.map(item => item.key)
+        nestByRegionId.forEach(item => {
+          regions[item.key] = item.values
+        })
+
+        // path 生成器
+        const lineGenerator = d3
+          .line()
+          .x(d => x(d.date))
+          .y(d => y(d.percent))
+        svg
+          .selectAll('.line')
+          .data(regionIds)
+          .enter()
+          .append('path')
+          .attr('class', 'line')
+          .attr('id', regionId => `region-${regionId}`)
+          .attr('d', regionId => lineGenerator(regions[regionId]))
+          .style('stroke', regionId => colorScale(regionId))
+        // .style('fill', 'none')
       }
     </script>
   </body>

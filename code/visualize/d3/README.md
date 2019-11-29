@@ -603,3 +603,8 @@ Step 1，绘制网格：
 哦哦，如果不单独绘制这两条轴，效果是这样的：
 
 ![](./art/d3-glory-step-1-grid-5.png)
+
+Step 2，绘制数据：
+
+![](./art/d3-glory-step-2-lines.png)
+
