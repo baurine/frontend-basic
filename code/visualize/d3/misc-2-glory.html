@@ -7,6 +7,17 @@
     <title>D3 Example</title>
     <script src="http://d3js.org/d3.v5.min.js"></script>
     <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      }
+      .root {
+        display: flex;
+      }
+      .legend {
+        margin-top: 20px;
+      }
+
       .axis text {
         font-weight: bold;
       }
@@ -27,10 +38,20 @@
         stroke: steelblue;
         stroke-width: 1.5px;
       }
+
+      .legend-item {
+        cursor: pointer;
+      }
+      .legend-item:hover {
+        text-decoration: underline;
+      }
     </style>
   </head>
   <body>
-    <svg></svg>
+    <div class="root">
+      <div class="chart"></div>
+      <div class="legend"></div>
+    </div>
     <script>
       d3.csv(
         // 'https://raw.githubusercontent.com/levvsha/d3-in-all-its-glory-en/master/stats/data.csv'
@@ -62,7 +83,8 @@
         const x = d3.scaleTime().range([0, inWidth])
         const y = d3.scaleLinear().range([inHeight, 0])
         const svg = d3
-          .select('svg')
+          .select('.chart')
+          .append('svg')
           .attr('width', outWidth)
           .attr('height', outHeight)
           .append('g')
@@ -147,7 +169,7 @@
         svg.append('g').call(d3.axisLeft(y).ticks(0))
 
         ////////////////////////////////
-        // step 2
+        // step 2: draw lines
         // 按 regionId 进行分组，相同 regionId 的元素聚合在一起
         const nestByRegionId = d3
           .nest()
@@ -155,9 +177,9 @@
           .sortKeys((v1, v2) => (parseInt(v1, 10) > parseInt(v2, 10) ? 1 : -1))
           .entries(data)
         // [{key: "1", values: [{regionId: "1", regionName: ..., date: ..., precent: ...}, {regionId: "1", ...} ]}]
-        console.log(nestByRegionId)
+        // console.log(nestByRegionId)
 
-        const regions = {}
+        let regions = {}
         // d3.map(data, d => d.regionId)
         //   .keys() // 这个方法去重了?
         //   .forEach(function(d, i) {
@@ -187,6 +209,76 @@
           .attr('d', regionId => lineGenerator(regions[regionId]))
           .style('stroke', regionId => colorScale(regionId))
         // .style('fill', 'none')
+
+        /////////////////////////////////////
+        // step 3: add legend
+        const regionsNamesById = {}
+        nestByRegionId.forEach(item => {
+          regionsNamesById[item.key] = item.values[0].regionName
+        }) // [{1: 'Ryazan Oblast': 5: 'Vladimir Oblast', ...}]
+        regions = {}
+        nestByRegionId.forEach(item => {
+          regions[item.key] = {
+            data: item.values,
+            enabled: true
+          }
+        })
+
+        const legendContainer = d3.select('.legend')
+        const legends = legendContainer
+          .append('svg')
+          .attr('width', 150)
+          .attr('height', 353)
+          .selectAll('g')
+          .data(regionIds)
+          .enter()
+          .append('g')
+          .attr('class', 'legend-item')
+          .attr('transform', (regionId, idx) => `translate(0, ${idx * 20})`)
+          .on('click', clickLegendHandler)
+
+        legends
+          .append('rect')
+          .attr('x', 0)
+          .attr('y', 0)
+          .attr('width', 12)
+          .attr('height', 12)
+          .style('fill', regionId => colorScale(regionId))
+          .select(function() {
+            return this.parentNode
+          }) // 切换目标
+          .append('text')
+          .attr('x', 20)
+          .attr('y', 10)
+          .text(regionId => regionsNamesById[regionId])
+          .attr('class', 'textselected')
+          .style('text-anchor', 'start')
+          .style('font-size', 12)
+
+        function clickLegendHandler(regionId, idx) {
+          regions[regionId].enabled = !regions[regionId].enabled
+          reDrawChart()
+        }
+        function reDrawChart() {
+          const enabledRegionIds = regionIds.filter(
+            regionId => regions[regionId].enabled
+          )
+          const paths = svg.selectAll('.line').data(enabledRegionIds)
+          paths.exit().remove()
+          paths
+            .enter()
+            .append('path')
+            .merge(paths)
+            .attr('class', 'line')
+            .attr('id', regionId => `region-${regionId}`)
+            .attr('d', regionId => lineGenerator(regions[regionId].data))
+            .style('stroke', regionId => colorScale(regionId))
+
+          legends.each(function(regionId) {
+            const isEnabled = enabledRegionIds.indexOf(regionId) >= 0
+            d3.select(this).classed('disabled', !isEnabled)
+          })
+        }
       }
     </script>
   </body>

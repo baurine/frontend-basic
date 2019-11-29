@@ -608,3 +608,6 @@ Step 2，绘制数据：
 
 ![](./art/d3-glory-step-2-lines.png)
 
+Step 3: 加 legend
+
+![](./art/d3-glory-step-3-legend.png)
