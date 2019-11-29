@@ -21,6 +21,8 @@ D3.js，类似 SVG 中的 jQuery，同样拥有强大的选择器，链式调用
 - [D3.js 上手 - 折线图](https://greenmzc.github.io/2016/10/18/D3-js%E4%B8%8A%E6%89%8B%E2%80%94%E2%80%94%E6%8A%98%E7%BA%BF%E5%9B%BE/)
 - [用 d3.js 实现基于 SVG 的线形图](http://www.alloyteam.com/2013/12/d3-line-chart/)
 - [D3 examples search engine](https://blockbuilder.org/search)
+- [The D3.js Graph Gallery](https://www.d3-graph-gallery.com/)
+- [Observable](https://observablehq.com/@d3)
 
 ## D3.js 入门教程
 
@@ -548,6 +550,18 @@ d3.json('data/china.geojson').then(geojson => {
 ```
 
 ## Misc
+
+### D3 API
+
+- [API](https://github.com/d3/d3/blob/master/API.md)
+- [Observable](https://observablehq.com/@d3)
+- [D3 is not a Data Visualization Library](https://medium.com/@Elijah_Meeks/d3-is-not-a-data-visualization-library-67ba549e8520)
+
+D3.js 可以作为一个整体使用，但体积会比较大，D3.js 把它的代码拆成了很多个 (三十一个) 小的功能库，如果只需要它的一部分功能，可以单独导入此功能的库，比如 d3-color, d3-scale-chromatic ... (loadash 也是类似的分包策略) 每个子库的演示可以到 [Observable](https://observablehq.com/@d3) 上观看。
+
+最重要的几个库：d3-select, d3-scale ...
+
+[D3 is not a Data Visualization Library](https://medium.com/@Elijah_Meeks/d3-is-not-a-data-visualization-library-67ba549e8520) 这篇文章将 D3 的所有功能库作了一些分类并进行了讲解，帮助理解这些功能库。
 
 ### 绘制折线图
 
