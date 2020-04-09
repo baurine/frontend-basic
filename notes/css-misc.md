@@ -51,3 +51,63 @@ white-space 也可以设置不换行，只显示成一行，使用 nowrap 属性
   text-overflow: ellipsis;
 }
 ```
+
+## pre / code
+
+- [HTML pre 和 code 的作用和用法](https://www.jianshu.com/p/99efe7eaf9a8)
+- [HTML pre 和 code 的详解](https://www.jianshu.com/p/61c0af018ed0)
+
+pre 元素可定义预格式化的文本。被包围在 pre 元素中的文本通常会保留空格和换行符。而文本也会呈现为等宽字体。
+
+(pre 标签意思是 preformatted text)
+
+code 在语义上表示里面包含的内容为计算机源代码，它通常只将内容变成等宽字体，但不会保留空格和换行符。
+
+(如果只是希望使用等宽字体，但内容在语义上并不是计算机源代码，可以使用 `<tt>` tag。)
+
+可以对比下面代码的效果：
+
+```
+<pre>
+  hello
+  world
+</pre>
+<code>
+  hello
+  world
+</code>
+```
+
+效果如下：
+
+```
+  hello
+  world
+hello world
+```
+
+所以总结一下就是，code 在语义上表示源代码，一般用它来显示单行代码。
+
+pre 在语义上并没有特别含义，它用来显示一大段需要保留格式的预置文本内容，如果内容为非代码，则单独使用 pre，如果内部内容为源代码，但 pre 可以和 code 配合使用，如下所示：
+
+```html
+<pre>
+  <code>
+  ...
+  </code>
+</pre>
+```
+
+用 pre 和保留格式，用 code 来在语义上表示为源代码。
+
+另外，为什么一般大家都在 pre 中配合 code 使用，因为在页面上对这部分代码内容进行语法高亮时，额外添加的的类名一般都是作用在 code 标签上的，比如：
+
+```html
+<pre>
+  <code class="hljs bash" lang="bash">
+  ...
+  </code>
+</pre>
+```
+
+当然，有些语法高亮库也会同时把 class 加到 pre 上。
