@@ -579,3 +579,60 @@ D3.js 可以作为一个整体使用，但体积会比较大，D3.js 把它的�
 像 GitHub contribution 那种简单的热力图，而不是用 heatmap.js 绘制的复杂热力图。
 
 - [Heatmap with data update](https://blockbuilder.org/zhouliwang/7864f974a34ec9230835163721d8c158)
+
+### 一个复杂一点的例子
+
+- [D3.js in all its glory](https://itnext.io/d3-js-in-all-its-glory-7066601aa16b)
+
+Step 1，绘制网格：
+
+![](./art/d3-glory-step-1-grid.png)
+
+使用 axisLeft 后的效果
+
+![](./art/d3-glory-step-1-grid-2.png)
+
+稍微 style 一下，隐藏轴，降低 tick 的可视度：
+
+![](./art/d3-glory-step-1-grid-3.png)
+
+再重新单独绘两条轴 (目的何在啊...那干嘛上面要隐藏掉呢)
+
+![](./art/d3-glory-step-1-grid-4.png)
+
+哦哦，如果不单独绘制这两条轴，效果是这样的：
+
+![](./art/d3-glory-step-1-grid-5.png)
+
+所以，对于 x 轴的 path 来说，它包括最底部的 x 轴，及在 x 轴首尾两端往 y 轴方向延伸的两根线，如下图所示：
+
+![](./art/d3-glory-step-1-x.png)
+
+同理，对于 y 轴的 path 来说，它包括最左边的 y 轴，及在 y 轴首尾两端往 x 轴方向延伸的两根线，如下图所示：
+
+![](./art/d3-glory-step-1-y.png)
+
+另外，默认 tickSize 不为 0，如果将其设为 0，比如：
+
+```js
+// 单独绘制两条轴的 path，上面两条轴的 path 在 style 中用 `display: none` 隐藏了
+svg
+  .append('g')
+  .attr('transform', `translate(0, ${inHeight})`)
+  .call(d3.axisBottom(x).ticks(0).tickSize(0))
+svg.append('g').call(d3.axisLeft(y).ticks(0).tickSize(0))
+```
+
+则：
+
+![](./art/d3-glory-step-1-tick-size.png)
+
+Step 2，绘制数据：
+
+![](./art/d3-glory-step-2-lines.png)
+
+Step 3: 加 legend
+
+![](./art/d3-glory-step-3-legend.png)
+
+后面的暂时还消化不了，放弃了...
