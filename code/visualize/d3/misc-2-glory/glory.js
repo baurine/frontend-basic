@@ -61,6 +61,9 @@ function draw(data) {
   x.domain(d3.extent(data, d => d.date)) // d3.extent = (array) => [min, max]
   y.domain([0, d3.max(data, d => d.percent)])
   colorScale.domain(d3.map(data, d => d.regionId).keys())
+  // console.log(data);
+  // console.log(d3.map(data, d => d.regionId));
+  // console.log(d3.map(data, d => d.regionId).keys());
 
   // svg
   const svg = d3
@@ -100,12 +103,12 @@ function draw(data) {
     svg
       .append('g')
       .attr('class', 'axis x-axis')
-      .attr('transform', `translate(0, ${inHeight + 6})`)
+      .attr('transform', `translate(0, ${inHeight + 6})`) // 将原点移到 (0, inHeight+6 处)
       .call(xAxis)
     svg
       .append('g')
       .attr('class', 'axis y-axis')
-      .attr('transform', 'translate(-7, 0)')
+      .attr('transform', 'translate(-7, 0)') // 将原点移到 (-7, 0) 处，y 轴方向不变，x 轴往负方向移动 7
       .call(yAxis)
     // 单独绘制两条轴的 path，上面两条轴的 path 在 style 中用 `display: none` 隐藏了
     svg
@@ -113,6 +116,12 @@ function draw(data) {
       .attr('transform', `translate(0, ${inHeight})`)
       .call(d3.axisBottom(x).ticks(0))
     svg.append('g').call(d3.axisLeft(y).ticks(0))
+    // 使用 tickSize(0)，默认并不为 0
+    // svg
+    //   .append('g')
+    //   .attr('transform', `translate(0, ${inHeight})`)
+    //   .call(d3.axisBottom(x).ticks(0).tickSize(0))
+    // svg.append('g').call(d3.axisLeft(y).ticks(0).tickSize(0))
   }
   drawAxes()
 
